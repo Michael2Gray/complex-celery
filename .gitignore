@@ -7,4 +7,6 @@ storybook-static
 coverage
 yarn-error.log
 
+.env.local
+
 .vscode
