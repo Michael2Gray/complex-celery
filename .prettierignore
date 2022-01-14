@@ -1,5 +1,6 @@
 dist
 dist-ssr
 storybook-static
+coverage
 
 .vscode
