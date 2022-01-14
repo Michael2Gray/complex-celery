@@ -4,5 +4,7 @@ dist
 dist-ssr
 *.local
 storybook-static
+coverage
+yarn-error.log
 
 .vscode

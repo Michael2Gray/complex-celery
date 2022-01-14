@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply min-h-full antialiased;
+  }
+
+  :root {
+    --header-height: theme('spacing.20');
+  }
+}
