@@ -22,13 +22,16 @@ module.exports = {
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     'src/**/*.{ts,tsx}',
-    '!src/vite-env.d.ts',
+    '!src/bootstrap.ts',
     '!src/main.tsx',
     '!**/stories/**',
     '!**/*.stories.{ts,tsx}',
     '!**/mocks/**',
     '!**/types/**',
+    '!**/models/**',
+    '!**/enums/**',
     '!**/index.ts',
+    '!**/*.d.ts',
   ],
 
   // The directory where Jest should output its coverage files
@@ -51,14 +54,14 @@ module.exports = {
   // ],
 
   // An object that configures minimum threshold enforcement for coverage results
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80,
-    },
-  },
+  // coverageThreshold: {
+  //   global: {
+  //     branches: 80,
+  //     functions: 80,
+  //     lines: 80,
+  //     statements: 80,
+  //   },
+  // },
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,

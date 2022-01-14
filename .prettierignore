@@ -2,5 +2,6 @@ dist
 dist-ssr
 storybook-static
 coverage
+public/mockServiceWorker.js
 
 .vscode
