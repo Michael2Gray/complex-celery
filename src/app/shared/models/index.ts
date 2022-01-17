@@ -3,4 +3,5 @@ export * from './contract.model';
 export * from './coordinates.model';
 export * from './stand.model';
 export * from './station.model';
+export * from './user.model';
 export * from './weather.model';

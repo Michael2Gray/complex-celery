@@ -4,6 +4,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 import { useContextFallback } from '../hooks';
 
 const AxiosContext = createContext<AxiosInstance | undefined>(axios);
+AxiosContext.displayName = 'AxiosContext';
 
 type AxiosProviderProps = {
   baseURL?: string;
