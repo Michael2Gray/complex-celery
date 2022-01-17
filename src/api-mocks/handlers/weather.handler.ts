@@ -1,9 +1,11 @@
 import { rest } from 'msw';
 
+import { URL_RESOURCE } from '../../app/shared/constants';
 import { WEATHER } from '../fixtures';
-import { URL_RESOURCE } from '../mocks.constant';
 
-export const getWeather = rest.get(URL_RESOURCE.WEATHER, (req, res, ctx) => {
+const baseURL = `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.WEATHER}`;
+
+export const getWeather = rest.get(baseURL, (req, res, ctx) => {
   const {
     url: { searchParams },
   } = req;

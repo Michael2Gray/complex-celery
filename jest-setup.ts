@@ -4,7 +4,7 @@ import { noop as _noop } from 'lodash';
 
 import '@testing-library/jest-dom';
 
-import { server } from './src/mocks/server';
+import { server } from './src/api-mocks/server';
 
 expect.extend(toHaveNoViolations);
 
