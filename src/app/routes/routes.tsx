@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { Dashboard } from '../features/dashboard';
-import { Login } from '../features/login';
+import { Dashboard } from '../modules/dashboard';
+import { Login } from '../modules/login';
 import { PATHS } from './paths.constants';
 
 export const AppRoutes = () => (

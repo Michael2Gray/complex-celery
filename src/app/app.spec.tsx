@@ -1,11 +1,9 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { App } from './app';
 
 describe('App', () => {
-  test('renders', async () => {
+  test('renders', () => {
     render(<App />);
-
-    expect(screen.getByText('Hello world!')).toBeInTheDocument();
   });
 });

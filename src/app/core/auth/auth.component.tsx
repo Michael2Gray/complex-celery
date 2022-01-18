@@ -1,4 +1,4 @@
-import { Login } from '../../features/login';
+import { Login } from '../../modules/login';
 import {
   FullScreenOverlay,
   Pending,
