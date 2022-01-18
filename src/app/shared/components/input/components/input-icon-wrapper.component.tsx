@@ -20,7 +20,7 @@ export const InputIconWrapper = ({
   return (
     <div
       className={clsx(
-        'text-2xl absolute top-3 text-zinc-600 pointer-events-none',
+        'text-2xl absolute top-3 text-slate-600 pointer-events-none',
         positionStyling
       )}
     >

@@ -1,6 +1,6 @@
 import { rest } from 'msw';
 
-import { AuthLoginRequest } from '../../app/core/auth';
+import { AuthLoginRequest } from '../../app/modules/auth';
 import { URL_RESOURCE } from '../../app/shared/constants';
 import { User } from '../../app/shared/models';
 import { users } from '../fixtures';

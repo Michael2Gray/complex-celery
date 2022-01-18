@@ -30,7 +30,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
   initialState = { status: AuthStatus.PENDING },
 }) => {
-  const baseUrl = URL_RESOURCE.AUTH;
   const axios = useAxios();
   const loginMutation = useLoginMutation();
 
@@ -38,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
   const verifyAuthentication = async () => {
     try {
-      const { data } = await axios.get(`${baseUrl}/authenticate`);
+      const { data } = await axios.get(`${URL_RESOURCE.AUTH}/authenticate`);
 
       localStorage.setItem('token', data);
     } catch (error) {

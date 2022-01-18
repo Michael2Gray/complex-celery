@@ -8,15 +8,6 @@
   }
 
   body {
-    @apply min-h-full antialiased;
-  }
-
-  :root {
-    --color-brand: 46, 136, 86;
-    --color-brand-hover: 39, 130, 85;
-    --color-brand-active: 34, 78, 56;
-    --color-brand-highlight: 156, 218, 144;
-
-    --header-height: theme('spacing.20');
+    @apply min-h-full antialiased text-slate-900;
   }
 }
