@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import { AuthStatus } from '../core/auth/auth.enum';
+import { AuthStatus } from '../modules/auth';
 import { renderWithRouter } from '../shared/utils';
 import { PATHS } from './paths.constants';
 import { AppRoutes } from './routes';

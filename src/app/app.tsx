@@ -2,7 +2,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 
-import { AuthProvider } from './core/auth';
+import { AuthProvider } from './modules/auth';
 import { AxiosProvider } from './shared/context';
 import { DefaultLayout } from './shared/layouts';
 import { AppRoutes } from './routes';

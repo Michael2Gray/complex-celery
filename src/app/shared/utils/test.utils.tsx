@@ -3,8 +3,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { MemoryRouter, MemoryRouterProps, useLocation } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
-import { AuthProvider, AuthState } from '../../core/auth';
-import { AuthStatus } from '../../core/auth/auth.enum';
+import { AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
 import { AxiosProvider } from '../context';
 
 type TestRenderConfig = {
