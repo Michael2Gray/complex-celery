@@ -19,9 +19,13 @@
   "dependencies": {
     "axios": "^0.24.0",
     "clsx": "^1.1.1",
+    "framer-motion": "4.1.17",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-query": "^3.34.8"
+    "react-hook-form": "^7.24.1",
+    "react-icons": "^4.3.1",
+    "react-query": "^3.34.8",
+    "react-router": "^6.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.16.7",
@@ -33,10 +37,12 @@
     "@storybook/addon-links": "^6.4.12",
     "@storybook/addon-postcss": "^2.0.0",
     "@storybook/react": "^6.4.12",
+    "@tailwindcss/forms": "^0.4.0",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest-axe": "^3.5.3",
+    "@types/lodash": "^4.14.178",
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
