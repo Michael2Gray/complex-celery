@@ -4,11 +4,9 @@ import { noop as _noop } from 'lodash';
 
 import '@testing-library/jest-dom';
 
-import { server } from './src/mocks/server';
+import { server } from './src/api-mocks/server';
 
 expect.extend(toHaveNoViolations);
-
-process.env.VITE_API_URL = '/mock-api';
 
 setLogger({
   // eslint-disable-next-line no-console

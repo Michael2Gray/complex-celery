@@ -8,10 +8,6 @@
   }
 
   body {
-    @apply min-h-full antialiased;
-  }
-
-  :root {
-    --header-height: theme('spacing.20');
+    @apply min-h-full antialiased text-slate-900;
   }
 }

@@ -26,12 +26,13 @@ module.exports = {
     '!src/main.tsx',
     '!**/stories/**',
     '!**/*.stories.{ts,tsx}',
-    '!**/mocks/**',
+    '!**/api-mocks/**',
     '!**/types/**',
     '!**/models/**',
     '!**/enums/**',
     '!**/index.ts',
     '!**/*.d.ts',
+    '!**/test.utils.tsx',
   ],
 
   // The directory where Jest should output its coverage files
@@ -54,14 +55,14 @@ module.exports = {
   // ],
 
   // An object that configures minimum threshold enforcement for coverage results
-  // coverageThreshold: {
-  //   global: {
-  //     branches: 80,
-  //     functions: 80,
-  //     lines: 80,
-  //     statements: 80,
-  //   },
-  // },
+  coverageThreshold: {
+    global: {
+      branches: 80,
+      functions: 80,
+      lines: 80,
+      statements: 80,
+    },
+  },
 
   // A path to a custom dependency extractor
   // dependencyExtractor: undefined,
