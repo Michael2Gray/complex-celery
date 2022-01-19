@@ -10,6 +10,7 @@ import { AxiosError } from 'axios';
 import { URL_RESOURCE } from '../../shared/constants';
 import { useAxios } from '../../shared/context';
 import { useContextFallback } from '../../shared/hooks';
+import { User } from '../../shared/models';
 import { Auth } from './auth.component';
 import { AuthStatus } from './auth.enum';
 import { AuthLoginRequest, AuthState } from './auth.model';
@@ -17,7 +18,7 @@ import { useLoginMutation } from './auth.queries';
 
 type AuthContextState = AuthState & {
   token: string | null;
-  login: (params: AuthLoginRequest) => Promise<void>;
+  login: (params: AuthLoginRequest) => Promise<User>;
   logout: () => void;
 };
 
@@ -58,7 +59,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
     setAuthState({ status: AuthStatus.AUTHENTICATED, user });
 
-    verifyAuthentication();
+    if (user) {
+      verifyAuthentication();
+    }
+
+    return user;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

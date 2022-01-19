@@ -3,7 +3,7 @@ module.exports = {
   plugins: [require('@tailwindcss/forms')],
   theme: {
     fontFamily: {
-      sans: ['Montserrat', 'sans-serif'],
+      sans: ['Roboto', 'sans-serif'],
       mono: ['Roboto Mono', 'monospace'],
     },
     extend: {

@@ -17,6 +17,6 @@ describe('AppRoutes', () => {
       initialState: { status: AuthStatus.UNAUTHENTICATED },
     });
 
-    expect(screen.getByText('This is the Login')).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument();
   });
 });

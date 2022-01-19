@@ -1,6 +1,7 @@
 import { UnpackNestedValue, useForm } from 'react-hook-form';
 
 import { Button, TextField } from '../../../shared/components';
+import { LoginError } from './login-error.component';
 
 type LoginFormValues = {
   email: string;
@@ -13,9 +14,15 @@ export type LoginFormSubmitHandler = (
 
 type LoginFormProps = {
   onSubmit: LoginFormSubmitHandler;
+  error?: string;
+  onClearError: () => void;
 };
 
-export const LoginForm = ({ onSubmit }: LoginFormProps) => {
+export const LoginForm = ({
+  onSubmit,
+  error,
+  onClearError,
+}: LoginFormProps) => {
   const {
     register,
     handleSubmit,
@@ -61,6 +68,8 @@ export const LoginForm = ({ onSubmit }: LoginFormProps) => {
           Login
         </Button>
       </div>
+
+      {error && <LoginError error={error} onClear={onClearError} />}
     </form>
   );
 };

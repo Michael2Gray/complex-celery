@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { Toaster } from '../components';
+import { Notifications } from '../../modules/notifications';
 import { Menu } from './menu.layout';
 
 type DefaultLayoutProps = { children: ReactNode };
@@ -14,7 +14,7 @@ export const DefaultLayout = ({ children }: DefaultLayoutProps) => (
       <div className="sticky top-0 z-10">
         <div className="relative z-10" />
         <div className="absolute w-full">
-          <Toaster />
+          <Notifications />
         </div>
       </div>
       {children}

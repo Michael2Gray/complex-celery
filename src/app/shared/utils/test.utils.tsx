@@ -1,9 +1,17 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { MemoryRouter, MemoryRouterProps, useLocation } from 'react-router-dom';
+import {
+  generatePath,
+  MemoryRouter,
+  MemoryRouterProps,
+  Route,
+  Routes,
+  useLocation,
+} from 'react-router-dom';
 import { render } from '@testing-library/react';
 
 import { AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
+import { NotificationsProvider } from '../../modules/notifications';
 import { AxiosProvider } from '../context';
 
 type TestRenderConfig = {
@@ -40,10 +48,12 @@ const DefaultTestProviders = ({
     },
   },
 }: DefaultTestProvidersConfig) => (
-  <AxiosProvider>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider initialState={initialState}>{children}</AuthProvider>
-    </QueryClientProvider>
+  <AxiosProvider baseURL="/mock-api">
+    <NotificationsProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider initialState={initialState}>{children}</AuthProvider>
+      </QueryClientProvider>
+    </NotificationsProvider>
   </AxiosProvider>
 );
 
@@ -71,4 +81,27 @@ export const renderWithRouter = (
       <RouteLocation />
     </MemoryRouter>,
     { queryClient, initialState }
+  );
+
+type RenderRouteConfig = {
+  path?: string;
+  params?: Parameters<typeof generatePath>[1];
+} & RenderWithRouterConfig;
+
+export const renderRoute = (
+  ui: React.ReactElement,
+  {
+    path = '/',
+    params,
+    queryClient,
+    initialEntries = [generatePath(path, params)],
+    initialState,
+  }: RenderRouteConfig = {}
+) =>
+  renderWithRouter(
+    <Routes>
+      <Route path={path} element={ui} />
+      <Route path="*" element={null} />
+    </Routes>,
+    { initialEntries, queryClient, initialState }
   );

@@ -4,3 +4,6 @@ export const URL_RESOURCE = {
   STATIONS: '/stations',
   WEATHER: '/weather',
 } as const;
+
+export const DEFAULT_API_ERROR_MESSAGE =
+  "We're sorry, but something went wrong!";

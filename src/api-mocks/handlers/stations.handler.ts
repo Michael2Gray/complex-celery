@@ -3,7 +3,7 @@ import { rest } from 'msw';
 import { URL_RESOURCE } from '../../app/shared/constants';
 import { STATIONS } from '../fixtures';
 
-const baseURL = `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.STATIONS}`;
+const baseURL = `/mock-api${URL_RESOURCE.STATIONS}`;
 
 export const getStations = rest.get(baseURL, (req, res, ctx) => {
   const {
@@ -41,4 +41,4 @@ export const getStation = rest.get(`${baseURL}/:id`, (req, res, ctx) => {
   );
 });
 
-export const handlers = [getStation, getStations];
+export const handlers = [getStations, getStation];
