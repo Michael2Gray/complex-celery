@@ -1,4 +1,4 @@
-import { Login } from '../../modules/login';
+import { LoginRoute } from '../../modules/login';
 import {
   FullScreenOverlay,
   Pending,
@@ -23,7 +23,7 @@ export const Auth = ({ children }: AuthProps) => {
   if (status === AuthStatus.UNAUTHENTICATED) {
     return (
       <UnauthenticatedLayout>
-        <Login />
+        <LoginRoute />
       </UnauthenticatedLayout>
     );
   }

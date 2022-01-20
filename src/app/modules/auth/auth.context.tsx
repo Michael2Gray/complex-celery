@@ -5,10 +5,9 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { URL_RESOURCE } from '../../shared/constants';
-import { useAxios } from '../../shared/context';
 import { useContextFallback } from '../../shared/hooks';
 import { User } from '../../shared/models';
 import { Auth } from './auth.component';
@@ -31,15 +30,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   children,
   initialState = { status: AuthStatus.PENDING },
 }) => {
-  const axios = useAxios();
   const loginMutation = useLoginMutation();
 
   const [authState, setAuthState] = useState<AuthState>(initialState);
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem('token')
+  );
 
   const verifyAuthentication = async () => {
     try {
-      const { data } = await axios.get(`${URL_RESOURCE.AUTH}/authenticate`);
+      const { data } = await axios.get<string>(
+        `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.AUTH}/authenticate`
+      );
 
+      setToken(data);
       localStorage.setItem('token', data);
     } catch (error) {
       localStorage.removeItem('token');
@@ -67,6 +71,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const logout = useCallback(() => {
+    setToken(null);
+    setAuthState({ status: AuthStatus.UNAUTHENTICATED });
+  }, []);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const initialise = useCallback(() => verifyAuthentication(), []);
 
@@ -83,11 +92,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   const value = useMemo(
     () => ({
       ...authState,
-      token: localStorage.getItem('token'),
+      token,
       login,
-      logout: () => setAuthState({ status: AuthStatus.UNAUTHENTICATED }),
+      logout,
     }),
-    [authState, login]
+    [authState, login, logout, token]
   );
 
   return (

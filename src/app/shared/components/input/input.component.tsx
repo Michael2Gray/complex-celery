@@ -51,6 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         disabled={isDisabled}
         ref={ref}
+        type={type}
         aria-required={isRequired}
         aria-invalid={isInvalid}
         aria-describedby={describedby}

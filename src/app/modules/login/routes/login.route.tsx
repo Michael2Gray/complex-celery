@@ -5,7 +5,7 @@ import { useAuth } from '../../auth';
 import { useNotifications } from '../../notifications';
 import { LoginBanner, LoginForm, LoginFormSubmitHandler } from '../components';
 
-export const Login = () => {
+export const LoginRoute = () => {
   const { login } = useAuth();
   const [loginError, setLoginError] = useState<string>();
   const { addNotification } = useNotifications();
