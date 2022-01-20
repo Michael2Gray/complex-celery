@@ -1,9 +1,5 @@
-import { LoginRoute } from '../../modules/login';
-import {
-  FullScreenOverlay,
-  Pending,
-  UnauthenticatedLayout,
-} from '../../shared/layouts';
+import { Login } from '../../modules/login';
+import { FullScreenOverlay, Pending } from '../../shared/layouts';
 import { useAuth } from './auth.context';
 import { AuthStatus } from './auth.enum';
 
@@ -21,11 +17,7 @@ export const Auth = ({ children }: AuthProps) => {
   }
 
   if (status === AuthStatus.UNAUTHENTICATED) {
-    return (
-      <UnauthenticatedLayout>
-        <LoginRoute />
-      </UnauthenticatedLayout>
-    );
+    return <Login />;
   }
 
   return <>{children}</>;

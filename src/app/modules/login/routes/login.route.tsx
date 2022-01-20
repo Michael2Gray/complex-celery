@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
+import { CenteredColumn, Heading } from '../../../shared/components';
+import { UnauthenticatedLayout } from '../../../shared/layouts';
 import { getApiErrorMessage } from '../../../shared/utils';
 import { useAuth } from '../../auth';
 import { useNotifications } from '../../notifications';
 import { LoginBanner, LoginForm, LoginFormSubmitHandler } from '../components';
 
-export const LoginRoute = () => {
+export const Login = () => {
   const { login } = useAuth();
   const [loginError, setLoginError] = useState<string>();
   const { addNotification } = useNotifications();
@@ -28,14 +30,18 @@ export const LoginRoute = () => {
   };
 
   return (
-    <>
+    <UnauthenticatedLayout className="bg-login-pattern">
       <LoginBanner />
 
-      <LoginForm
-        onSubmit={handleSubmit}
-        error={loginError}
-        onClearError={handleClearError}
-      />
-    </>
+      <CenteredColumn>
+        <Heading>Let's prep some Veg!</Heading>
+
+        <LoginForm
+          onSubmit={handleSubmit}
+          error={loginError}
+          onClearError={handleClearError}
+        />
+      </CenteredColumn>
+    </UnauthenticatedLayout>
   );
 };
