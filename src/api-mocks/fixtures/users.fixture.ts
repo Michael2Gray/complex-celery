@@ -1,6 +1,6 @@
 import { User } from '../../app/shared/models';
 
-export const users: User[] = [
+export const USERS: User[] = [
   {
     id: '0',
     email: 'mgray@email.com',

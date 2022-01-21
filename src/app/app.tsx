@@ -4,9 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import { AuthProvider } from './modules/auth';
 import { NotificationsProvider } from './modules/notifications';
-import { AxiosProvider } from './shared/context';
-import { DefaultLayout } from './shared/layouts';
-import { Config, ConfigProvider } from './config';
+import { Config } from './config';
 import { AppRoutes } from './routes';
 
 const queryClient = new QueryClient({
@@ -22,20 +20,14 @@ type AppProps = { config: Config };
 export const App = ({ config }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <NotificationsProvider>
-      <AuthProvider>
-        <AxiosProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
-          <ConfigProvider externalConfig={config}>
-            <BrowserRouter>
-              <DefaultLayout>
-                <AppRoutes />
-              </DefaultLayout>
-            </BrowserRouter>
-          </ConfigProvider>
+      <AuthProvider config={config}>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
 
-          {import.meta.env.VITE_REACT_QUERY_DEVTOOLS === 'true' && (
-            <ReactQueryDevtools initialIsOpen={false} />
-          )}
-        </AxiosProvider>
+        {import.meta.env.VITE_REACT_QUERY_DEVTOOLS === 'true' && (
+          <ReactQueryDevtools initialIsOpen={false} />
+        )}
       </AuthProvider>
     </NotificationsProvider>
   </QueryClientProvider>

@@ -16,7 +16,9 @@ module.exports = {
         },
       },
       backgroundImage: {
-        'login-pattern': 'linear-gradient(120deg, #2e8856 55%, #ffffff 55%);',
+        'login-pattern': 'linear-gradient(120deg, #278255 55%, #224e38 55%);',
+        'default-pattern':
+          'linear-gradient(to bottom, #224e38 200px, transparent 0);',
       },
     },
   },

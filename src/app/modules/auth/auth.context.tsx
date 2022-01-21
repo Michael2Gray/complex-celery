@@ -5,46 +5,63 @@ import {
   useMemo,
   useState,
 } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 
-import { URL_RESOURCE } from '../../shared/constants';
+import { Config } from '../../config';
+import { useAxios } from '../../shared/context';
 import { useContextFallback } from '../../shared/hooks';
 import { User } from '../../shared/models';
 import { Auth } from './auth.component';
+import { BASE_URL } from './auth.constant';
 import { AuthStatus } from './auth.enum';
 import { AuthLoginRequest, AuthState } from './auth.model';
 import { useLoginMutation } from './auth.queries';
 
 type AuthContextState = AuthState & {
   token: string | null;
-  login: (params: AuthLoginRequest) => Promise<User>;
-  logout: () => void;
+  user?: User;
+  login: (params: AuthLoginRequest) => Promise<void>;
+  logOut: () => void;
 };
 
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
 AuthContext.displayName = 'AuthContext';
 
-type AuthProviderProps = { initialState?: AuthState };
+type AuthProviderProps = { config: Config; initialState?: AuthState };
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({
-  children,
+  config,
   initialState = { status: AuthStatus.PENDING },
+  children,
 }) => {
+  const axios = useAxios();
   const loginMutation = useLoginMutation();
-
   const [authState, setAuthState] = useState<AuthState>(initialState);
   const [token, setToken] = useState<string | null>(
     localStorage.getItem('token')
   );
+  const [user, setUser] = useState<User | undefined>(undefined);
 
-  const verifyAuthentication = async () => {
+  const fetchCurrentUser = async () => {
     try {
-      const { data } = await axios.get<string>(
-        `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.AUTH}/authenticate`
-      );
+      const { data: user } = await axios.get(`${BASE_URL}/user`);
+      setAuthState({ status: AuthStatus.AUTHENTICATED });
+      setUser(user);
+    } catch (error) {
+      setAuthState({ status: AuthStatus.ERROR, error });
+    }
+  };
 
-      setToken(data);
+  const verifyAuthentication = useCallback(async () => {
+    setAuthState({ status: AuthStatus.FETCHING_USER });
+
+    try {
+      const { data } = await axios.get(`${BASE_URL}/authenticate`);
+
       localStorage.setItem('token', data);
+      setToken(data);
+
+      await fetchCurrentUser();
     } catch (error) {
       localStorage.removeItem('token');
 
@@ -56,52 +73,47 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
         setAuthState({ status: AuthStatus.ERROR, error });
       }
     }
-  };
-
-  const login = useCallback(async (params: AuthLoginRequest) => {
-    const user = await loginMutation.mutateAsync(params);
-
-    setAuthState({ status: AuthStatus.AUTHENTICATED, user });
-
-    if (user) {
-      verifyAuthentication();
-    }
-
-    return user;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const logout = useCallback(() => {
-    setToken(null);
+  const login = useCallback(async (params: AuthLoginRequest) => {
+    loginMutation
+      .mutateAsync(params)
+      .then(async () => await verifyAuthentication())
+      .catch((error) => setAuthState({ status: AuthStatus.ERROR, error }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const logOut = useCallback(() => {
     setAuthState({ status: AuthStatus.UNAUTHENTICATED });
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialise = useCallback(() => verifyAuthentication(), []);
-
   useEffect(() => {
     if (authState.status === AuthStatus.PENDING) {
-      initialise();
+      verifyAuthentication();
     }
 
     if (authState.status === AuthStatus.UNAUTHENTICATED) {
+      setToken(null);
+      setUser(undefined);
       localStorage.removeItem('token');
     }
-  }, [initialise, authState.status]);
+  }, [verifyAuthentication, authState.status]);
 
   const value = useMemo(
     () => ({
       ...authState,
       token,
+      user,
       login,
-      logout,
+      logOut,
     }),
-    [authState, login, logout, token]
+    [authState, login, logOut, token, user]
   );
 
   return (
     <AuthContext.Provider value={value}>
-      <Auth>{children}</Auth>
+      <Auth config={config}>{children}</Auth>
     </AuthContext.Provider>
   );
 };

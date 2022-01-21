@@ -8,6 +8,6 @@
   }
 
   body {
-    @apply min-h-full antialiased text-slate-900;
+    @apply min-h-full antialiased text-neutral-900 bg-neutral-100;
   }
 }
