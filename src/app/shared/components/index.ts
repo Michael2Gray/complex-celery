@@ -1,6 +1,5 @@
 export * from './alert';
 export * from './availability-indicator';
-export * from './avatar';
 export * from './branding';
 export * from './button';
 export * from './card';
@@ -17,7 +16,6 @@ export * from './label';
 export * from './legend';
 export * from './loader';
 export * from './location-card';
-export * from './menu';
 export * from './property';
 export * from './text-field';
 export * from './weather-icon';

@@ -10,8 +10,15 @@ const meta: ComponentMeta<typeof WeatherIcon> = {
 export default meta;
 
 const Template: ComponentStory<typeof WeatherIcon> = (args) => (
-  <WeatherIcon {...args} />
+  <WeatherIcon className="w-8 h-8" {...args} />
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  weather: {
+    id: 800,
+    main: 'Clear',
+    description: 'clear sky',
+    icon: '01n',
+  },
+};

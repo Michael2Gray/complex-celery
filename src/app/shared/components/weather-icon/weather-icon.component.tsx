@@ -5,15 +5,10 @@ import { getSvgSrcFromWeatherInfo } from './weather-icon.util';
 
 type WeatherIconProps = {
   weather?: WeatherInfo;
-  isLarge?: boolean;
   className?: string;
 };
 
-export const WeatherIcon = ({
-  weather,
-  isLarge,
-  className,
-}: WeatherIconProps) => (
+export const WeatherIcon = ({ weather, className }: WeatherIconProps) => (
   <div className={className}>
     <motion.img
       src={getSvgSrcFromWeatherInfo(weather?.main)}

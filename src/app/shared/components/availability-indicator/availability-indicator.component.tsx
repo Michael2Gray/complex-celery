@@ -8,14 +8,19 @@ type AvailabilityIndicatorProps = {
 export const AvailabilityIndicator = ({
   value,
   total = 20,
-}: AvailabilityIndicatorProps) => (
-  <span
-    className={clsx({
-      'text-yellow-400': value >= total / 4 && value <= total / 2,
-      'text-red-600': value <= total / 4,
-      'text-brand-400': value >= total / 2,
-    })}
-  >
-    {value}
-  </span>
-);
+}: AvailabilityIndicatorProps) => {
+  const quarter = total / 4;
+  const half = total / 2;
+
+  return (
+    <span
+      className={clsx({
+        'text-yellow-400': value >= quarter && value <= half,
+        'text-red-600': value <= quarter,
+        'text-brand-400': value >= half,
+      })}
+    >
+      {value}
+    </span>
+  );
+};

@@ -1,6 +1,5 @@
 import { MdOutlineLocationCity } from 'react-icons/md';
 
-import { Avatar } from '../../../../shared/components';
 import { Country } from '../../models';
 import { CountryIcon } from './country-icon.component';
 
@@ -17,9 +16,7 @@ export const CountryFlag: React.FC<CountryFlagProps> = ({
     {country ? (
       <CountryIcon country={country.name} />
     ) : (
-      <Avatar>
-        <MdOutlineLocationCity />
-      </Avatar>
+      <MdOutlineLocationCity />
     )}
   </div>
 );
