@@ -2,7 +2,7 @@ import { useQuery } from 'react-query';
 
 import { URL_RESOURCE } from '../../../shared/constants';
 import { useAxios } from '../../../shared/context';
-import { Contract } from '../../../shared/models';
+import { Contract, Station, Weather } from '../../../shared/models';
 import { getCitiesFromContracts } from '../utils';
 
 export const useCitiesQuery = (enabled: boolean) => {
@@ -19,4 +19,39 @@ export const useCitiesQuery = (enabled: boolean) => {
   };
 
   return useQuery(['contracts'], query, { enabled });
+};
+
+export const useStationsQuery = (city: string) => {
+  const axios = useAxios();
+
+  const query = async () => {
+    const { data } = await axios.get<Station[]>(URL_RESOURCE.STATIONS, {
+      params: {
+        apiKey: import.meta.env.VITE_JCDECAUX_API_KEY,
+        contract: city,
+      },
+    });
+
+    return data;
+  };
+
+  return useQuery('stationsByCity', query);
+};
+
+export const useWeatherQuery = (location?: string) => {
+  const axios = useAxios();
+
+  const query = async () => {
+    const { data } = await axios.get<Weather>(URL_RESOURCE.WEATHER, {
+      params: {
+        q: location,
+        units: 'metric',
+        appid: import.meta.env.VITE_OPENWEATHER_API_KEY,
+      },
+    });
+
+    return data;
+  };
+
+  return useQuery('weather', query);
 };

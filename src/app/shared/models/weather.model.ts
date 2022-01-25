@@ -50,7 +50,7 @@ export type WeatherInfo = {
   description: string;
   icon: string;
   id: number;
-  main: string;
+  main: WeatherInfoMain;
 };
 
 export type WeatherWind = {

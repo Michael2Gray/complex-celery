@@ -2,12 +2,10 @@ import clsx from 'clsx';
 
 import { useTimeout } from '../../hooks';
 import { Heading } from '../heading';
-import { ALERT_VARIANTS } from './alert.constant';
-import { AlertVariant } from './alert.model';
 
 type AlertProps = {
   title: React.ReactNode;
-  variant?: AlertVariant;
+  variant?: 'info' | 'success' | 'error' | 'warning';
   message?: React.ReactNode;
   className?: string;
   onClear: () => void;
@@ -29,7 +27,12 @@ export const Alert = ({
     <div
       className={clsx(
         'rounded-md p-3',
-        ALERT_VARIANTS[variant].body,
+        {
+          'bg-blue-100 border-blue-800': variant === 'info',
+          'bg-brand-100 border-brand-800': variant === 'success',
+          'bg-red-100 border-red-800': variant === 'error',
+          'bg-yellow-200 border-yellow-700': variant === 'warning',
+        },
         className
       )}
       onMouseEnter={stopTimeout}
@@ -38,7 +41,12 @@ export const Alert = ({
       <Heading
         level={2}
         size="sm"
-        className={clsx(ALERT_VARIANTS[variant].title)}
+        className={clsx({
+          'text-blue-800': variant === 'info',
+          'text-brand-800': variant === 'success',
+          'text-red-800': variant === 'error',
+          'text-yellow-700': variant === 'warning',
+        })}
       >
         {title}
       </Heading>

@@ -1,6 +1,20 @@
 import { StationStatus } from '../enums';
-import { Coords } from './coordinates.model';
-import { Stand } from './stand.model';
+
+export type Coords = Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
+
+export type Availability = {
+  bikes: number;
+  stands: number;
+  mechanicalBikes: number;
+  electricalBikes: number;
+  electricalInternalBatteryBikes: number;
+  electricalRemovableBatteryBikes: number;
+};
+
+export type Stand = {
+  availabilities: Availability | null;
+  capacity: number;
+};
 
 export type Station = {
   number: number;

@@ -1,5 +1,7 @@
 import { Coords } from '../../../shared/models';
 
+export const DEFAULT_ISO_CODE = 'IE';
+
 export const ISO_COUNTRIES: Record<string, string> = {
   AF: 'Afghanistan',
   AX: 'Aland Islands',

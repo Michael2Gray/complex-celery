@@ -1,11 +1,15 @@
+import { ReactNode } from 'react';
+import clsx from 'clsx';
+
 import { Loader } from '../components';
 
 type PendingProps = {
-  children: React.ReactNode;
+  children: ReactNode;
+  className?: string;
 };
 
-export const Pending = ({ children }: PendingProps): JSX.Element => (
-  <div data-testid="pending-renderer" className="flex flex-col items-center">
+export const Pending = ({ children, className }: PendingProps) => (
+  <div className={clsx('flex flex-col items-center', className)}>
     <Loader />
     {children}
   </div>

@@ -3,9 +3,9 @@ import { isEmpty as _isEmpty } from 'lodash';
 import { DEFAULT_COORDS } from '../../../config';
 import { Contract, Coords } from '../../../shared/models';
 import { getDistanceBetweenCoords } from '../../../shared/utils';
+import { getCountryFromIsoCode, getKnownNullCountry } from '../../country';
 import { CITY_LAT_LNGS } from '../constants';
 import { City, CityKnownNull } from '../models';
-import { getCountryFromIsoCode, getKnownNullCountry } from './country.util';
 
 export const getCoordsFromCity = (city: string): Coords | null =>
   Object.prototype.hasOwnProperty.call(CITY_LAT_LNGS, city)

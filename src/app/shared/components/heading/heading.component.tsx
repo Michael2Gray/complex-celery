@@ -35,6 +35,7 @@ export const Heading: React.FC<HeadingProps> = ({
         'text-2xl': size === 'lg',
         'text-xl': size === 'md',
         'text-lg': size === 'sm',
+        'text-md': size === 'xs',
       },
       className
     ),
