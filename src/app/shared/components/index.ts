@@ -16,6 +16,7 @@ export * from './label';
 export * from './legend';
 export * from './loader';
 export * from './location-card';
+export * from './page-title';
 export * from './property';
 export * from './text-field';
 export * from './weather-icon';

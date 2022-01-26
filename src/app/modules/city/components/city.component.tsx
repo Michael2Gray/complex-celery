@@ -3,7 +3,7 @@ import { StationsGrid } from './stations-grid.component';
 
 export const City = () => (
   <>
-    <CityCard hasLargeWeather />
+    <CityCard className="mb-12" hasLargeWeather />
 
     <StationsGrid />
   </>

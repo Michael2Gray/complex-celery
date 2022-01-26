@@ -1,6 +1,6 @@
 import { Context, useContext } from 'react';
 
-export const useContextFallback = <T,>(value: Context<T | undefined>): T => {
+export const useContextFallback = <T>(value: Context<T | undefined>): T => {
   const context = useContext<T | undefined>(value);
 
   if (context === undefined) {

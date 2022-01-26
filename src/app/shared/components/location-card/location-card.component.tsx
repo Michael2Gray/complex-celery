@@ -7,37 +7,33 @@ import { Divider } from '../divider';
 import { WeatherIcon } from '../weather-icon';
 
 type LocationCardProps = {
-  flag: ReactNode;
   children: ReactNode;
   footer?: ReactNode;
   weather?: WeatherInfo[];
   hasLargeWeather?: boolean;
   hasDivider?: boolean;
+  className?: string;
 };
 
 export const LocationCard = ({
-  flag,
   footer,
   weather,
   hasLargeWeather = false,
   hasDivider = false,
   children,
+  className,
 }: LocationCardProps) => (
-  <Card footer={footer}>
+  <Card className={className} footer={footer}>
     {weather && (
       <WeatherIcon
         className={clsx('absolute h-10 w-10 -top-4 -right-3', {
           'h-16 w-16 -top-9 -right-6': hasLargeWeather,
         })}
         weather={weather[0]}
-        isLarge={hasLargeWeather}
       />
     )}
 
-    <div className="flex items-center p-2">
-      {flag}
-      {!!children && <>{children}</>}
-    </div>
+    <div className="flex items-center p-2">{!!children && <>{children}</>}</div>
 
     {hasDivider && <Divider />}
   </Card>

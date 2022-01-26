@@ -10,15 +10,18 @@ const baseURL = `/mock-api${URL_RESOURCE.AUTH}`;
 const unauthenticatedUserMessage = 'Unauthenticated User';
 const validLogins = [{ email: 'mgray@email.com', password: 'test' }];
 
-const isAuthenticated = !import.meta.env.PROD;
+let activeUser: User | null = null;
 
 export const authenticate = rest.get(
   `${baseURL}/authenticate`,
   (req, res, ctx) => {
+    console.log('🖐 activeUser', activeUser);
+
     const token = 'secret_token';
+
     const [status, data] = [
-      isAuthenticated ? 200 : 400,
-      isAuthenticated ? token : unauthenticatedUserMessage,
+      activeUser ? 200 : 400,
+      activeUser ? token : unauthenticatedUserMessage,
     ];
 
     return delayedResponse(ctx.status(status), ctx.json(data));

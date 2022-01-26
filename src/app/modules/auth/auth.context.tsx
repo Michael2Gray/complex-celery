@@ -89,6 +89,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   }, []);
 
   useEffect(() => {
+    console.log('🖐 authState.status', authState.status);
+
     if (authState.status === AuthStatus.PENDING) {
       verifyAuthentication();
     }
@@ -98,7 +100,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
       setUser(undefined);
       localStorage.removeItem('token');
     }
-  }, [verifyAuthentication, authState.status]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authState.status]);
 
   const value = useMemo(
     () => ({

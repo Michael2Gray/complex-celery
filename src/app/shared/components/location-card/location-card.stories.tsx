@@ -18,7 +18,14 @@ const Template: ComponentStory<typeof LocationCard> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  children: <div>Location Card</div>,
+  children: (
+    <div>
+      <div className="h-20 w-20 mr-2">
+        <motion.img src={getSvgSrcFromCountry('Sweden', ['Sweden'])} />
+      </div>
+      Location Card
+    </div>
+  ),
   weather: [
     {
       id: 800,
@@ -27,9 +34,4 @@ Default.args = {
       icon: '01n',
     },
   ],
-  flag: (
-    <div className="h-20 w-20 mr-2">
-      <motion.img src={getSvgSrcFromCountry('Sweden', ['Sweden'])} />
-    </div>
-  ),
 };

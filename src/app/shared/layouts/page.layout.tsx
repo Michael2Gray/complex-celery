@@ -1,7 +1,17 @@
 import { ReactNode } from 'react';
 
+import { useAuth } from '../../modules/auth';
+import { PageTitle } from '../components';
+
 type PageProps = { children: ReactNode };
 
-export const Page = ({ children }: PageProps) => (
-  <div className="mx-auto max-w-5xl px-10 py-12 space-y-10">{children}</div>
-);
+export const Page = ({ children }: PageProps) => {
+  const { user } = useAuth();
+
+  return (
+    <div className="mx-auto max-w-5xl px-10 py-6">
+      <PageTitle>{`Welcome back${user ? ` ${user.name}!` : '!'}`}</PageTitle>
+      {children}
+    </div>
+  );
+};

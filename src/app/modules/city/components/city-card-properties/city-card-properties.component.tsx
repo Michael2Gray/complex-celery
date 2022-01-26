@@ -3,22 +3,10 @@ import { MdOutlineLocationOn } from 'react-icons/md';
 import { RiTempColdLine } from 'react-icons/ri';
 import clsx from 'clsx';
 
-import { Distance, Grid, Property } from '../../../shared/components';
-import { useCity } from '../context';
-
-const TEMP_VARIANTS = {
-  low: 'text-blue-400',
-  medium: 'text-yellow-400',
-  high: 'text-red-600',
-};
-
-const getTempGeneric = (value: number): keyof typeof TEMP_VARIANTS => {
-  if (value > 15) {
-    return 'high';
-  }
-
-  return value < 10 ? 'low' : 'medium';
-};
+import { Distance, Grid, Property } from '../../../../shared/components';
+import { useCity } from '../../context';
+import { TEMPERATURE_VARIANTS } from './city-card-properties.constant';
+import { getTempVariant } from './city-card-properties.util';
 
 export const CityCardProperties = () => {
   const {
@@ -43,7 +31,11 @@ export const CityCardProperties = () => {
           <div className="flex items-center">
             <RiTempColdLine className="mr-1" />{' '}
             {temperature && (
-              <div className={clsx(TEMP_VARIANTS[getTempGeneric(temperature)])}>
+              <div
+                className={clsx(
+                  TEMPERATURE_VARIANTS[getTempVariant(temperature)]
+                )}
+              >
                 {Math.round(temperature)}
               </div>
             )}
