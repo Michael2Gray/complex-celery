@@ -43,6 +43,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
   const [user, setUser] = useState<User | undefined>(undefined);
 
   const fetchCurrentUser = async () => {
+    setAuthState({ status: AuthStatus.FETCHING_USER });
+
     try {
       const { data: user } = await axios.get(`${BASE_URL}/user`);
       setAuthState({ status: AuthStatus.AUTHENTICATED });
@@ -52,9 +54,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
     }
   };
 
-  const verifyAuthentication = useCallback(async () => {
-    setAuthState({ status: AuthStatus.FETCHING_USER });
-
+  const authenticate = async () => {
     try {
       const { data } = await axios.get(`${BASE_URL}/authenticate`);
 
@@ -68,11 +68,20 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
       const { response } = error as AxiosError;
 
       if (response && response.data === 'Unauthenticated User') {
-        setAuthState({ status: AuthStatus.UNAUTHENTICATED });
+        logOut();
       } else {
         setAuthState({ status: AuthStatus.ERROR, error });
       }
     }
+  };
+
+  const verifyAuthentication = useCallback(async () => {
+    if (token) {
+      return await fetchCurrentUser();
+    }
+
+    return await authenticate();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -86,19 +95,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({
 
   const logOut = useCallback(() => {
     setAuthState({ status: AuthStatus.UNAUTHENTICATED });
+    setToken(null);
+    setUser(undefined);
+    localStorage.removeItem('token');
   }, []);
 
   useEffect(() => {
-    console.log('🖐 authState.status', authState.status);
-
     if (authState.status === AuthStatus.PENDING) {
       verifyAuthentication();
-    }
-
-    if (authState.status === AuthStatus.UNAUTHENTICATED) {
-      setToken(null);
-      setUser(undefined);
-      localStorage.removeItem('token');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authState.status]);

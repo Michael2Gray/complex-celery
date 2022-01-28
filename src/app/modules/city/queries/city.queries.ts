@@ -2,7 +2,8 @@ import { useQuery } from 'react-query';
 
 import { URL_RESOURCE } from '../../../shared/constants';
 import { useAxios } from '../../../shared/context';
-import { Contract, Station, Weather } from '../../../shared/models';
+import { Contract, Weather } from '../../../shared/models';
+import { Station } from '../models';
 import { getCitiesFromContracts } from '../utils';
 
 export const useCitiesQuery = (enabled: boolean) => {

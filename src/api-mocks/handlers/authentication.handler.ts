@@ -15,8 +15,6 @@ let activeUser: User | null = null;
 export const authenticate = rest.get(
   `${baseURL}/authenticate`,
   (req, res, ctx) => {
-    console.log('🖐 activeUser', activeUser);
-
     const token = 'secret_token';
 
     const [status, data] = [

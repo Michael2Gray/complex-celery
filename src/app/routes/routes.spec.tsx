@@ -6,10 +6,10 @@ import { PATHS } from './paths.constants';
 import { AppRoutes } from './routes';
 
 describe('AppRoutes', () => {
-  test('renders the dashboard by default', () => {
+  test('renders the initial city by default', () => {
     renderWithRouter(<AppRoutes />);
 
-    expect(screen.getByTestId('pathname')).toHaveValue(PATHS.dashboard);
+    expect(screen.getByTestId('pathname')).toHaveValue(PATHS.city);
   });
 
   test('renders the login if the app has an UNAUTHENTICATED status', () => {

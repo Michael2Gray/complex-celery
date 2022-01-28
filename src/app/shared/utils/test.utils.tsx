@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import { render } from '@testing-library/react';
 
+import { DEFAULT_CONFIG } from '../../config';
 import { AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
 import { NotificationsProvider } from '../../modules/notifications';
 import { AxiosProvider } from '../context';
@@ -39,19 +40,14 @@ const DefaultTestProviders = ({
   queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } }),
   initialState = {
     status: AuthStatus.AUTHENTICATED,
-    user: {
-      id: '0',
-      name: 'Michael Gray',
-      initials: 'MG',
-      email: 'michael.gray@email.com',
-      defaultLocation: 'Dublin',
-    },
   },
 }: DefaultTestProvidersConfig) => (
   <AxiosProvider baseURL="/mock-api">
     <NotificationsProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthProvider initialState={initialState}>{children}</AuthProvider>
+        <AuthProvider config={DEFAULT_CONFIG} initialState={initialState}>
+          {children}
+        </AuthProvider>
       </QueryClientProvider>
     </NotificationsProvider>
   </AxiosProvider>

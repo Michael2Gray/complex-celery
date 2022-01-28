@@ -23,7 +23,7 @@ describe('Login', () => {
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
-      expect(screen.getByTestId('pathname')).toHaveValue(PATHS.dashboard);
+      expect(screen.getByTestId('pathname')).toHaveValue(PATHS.city);
     });
   });
 
