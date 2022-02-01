@@ -36,10 +36,10 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       {icon && <InputIconWrapper icon={icon} iconPosition={iconPosition} />}
       <input
         className={clsx(
-          'w-full border rounded py-3 px-4 text-slate-700 transition duration-300',
-          'focus:outline-none focus:ring-1 disabled:opacity-40 placeholder-slate-200',
+          'w-full border rounded py-3 px-4 text-neutral-700 transition duration-300',
+          'focus:outline-none focus:ring-1 disabled:opacity-40 placeholder-neutral-200',
           {
-            'border-slate-80 focus:border-brand-400 focus:ring-brand-400 hover:border-slate-100 hover:ring-slate-100':
+            'border-neutral-80 focus:border-brand-400 focus:ring-brand-400 hover:border-neutral-100 hover:ring-neutral-100':
               !isInvalid && !isDisabled,
           },
           {
@@ -51,6 +51,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         )}
         disabled={isDisabled}
         ref={ref}
+        type={type}
         aria-required={isRequired}
         aria-invalid={isInvalid}
         aria-describedby={describedby}

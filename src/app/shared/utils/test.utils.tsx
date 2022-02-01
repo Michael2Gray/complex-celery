@@ -8,10 +8,14 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 
-import { AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
-import { NotificationsProvider } from '../../modules/notifications';
+import { ConfigProvider, DEFAULT_CONFIG } from '../../config';
+import { Auth, AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
 import { AxiosProvider } from '../context';
 
 type TestRenderConfig = {
@@ -39,22 +43,19 @@ const DefaultTestProviders = ({
   queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } }),
   initialState = {
     status: AuthStatus.AUTHENTICATED,
-    user: {
-      id: '0',
-      name: 'Michael Gray',
-      initials: 'MG',
-      email: 'michael.gray@email.com',
-      defaultLocation: 'Dublin',
-    },
   },
 }: DefaultTestProvidersConfig) => (
-  <AxiosProvider baseURL="/mock-api">
-    <NotificationsProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider initialState={initialState}>{children}</AuthProvider>
-      </QueryClientProvider>
-    </NotificationsProvider>
-  </AxiosProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider baseURL="/mock-api" initialState={initialState}>
+      <Auth>
+        <AxiosProvider baseURL="/mock-api">
+          <ConfigProvider externalConfig={DEFAULT_CONFIG}>
+            {children}
+          </ConfigProvider>
+        </AxiosProvider>
+      </Auth>
+    </AuthProvider>
+  </QueryClientProvider>
 );
 
 export const renderWithProviders = (
@@ -105,3 +106,6 @@ export const renderRoute = (
     </Routes>,
     { initialEntries, queryClient, initialState }
   );
+
+export const waitForLoading = async (loadingText = 'Chopping Celery') =>
+  waitForElementToBeRemoved(() => screen.getByText(`${loadingText}...`));

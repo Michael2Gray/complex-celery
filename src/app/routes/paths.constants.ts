@@ -1,4 +1,3 @@
 export const PATHS = {
-  dashboard: '/',
-  login: '/login',
+  city: '/',
 } as const;

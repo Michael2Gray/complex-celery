@@ -1,15 +1,11 @@
 import { UnpackNestedValue, useForm } from 'react-hook-form';
 
-import { Button, TextField } from '../../../shared/components';
+import { Button, Legend, TextField } from '../../../shared/components';
+import { LoginRequest } from '../models';
 import { LoginError } from './login-error.component';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
-
 export type LoginFormSubmitHandler = (
-  data: UnpackNestedValue<LoginFormValues>
+  data: UnpackNestedValue<LoginRequest>
 ) => any | Promise<any>;
 
 type LoginFormProps = {
@@ -27,14 +23,15 @@ export const LoginForm = ({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>();
+  } = useForm<LoginRequest>();
 
   return (
     <form
-      className="mx-auto max-w-2xl px-10 py-12 space-y-10 bg-slate-100 rounded-md"
+      className="mx-auto max-w-2xl px-10 py-12 space-y-10 bg-neutral-100 rounded-md"
       onSubmit={handleSubmit(async (values) => onSubmit(values))}
     >
       <fieldset className="space-y-6">
+        <Legend>Start sharpening your knives</Legend>
         <div className="space-x-6">
           <TextField
             type="email"

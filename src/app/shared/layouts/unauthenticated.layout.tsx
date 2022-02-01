@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
+import clsx from 'clsx';
 
-type UnauthenticatedLayoutProps = { children: ReactNode };
+type UnauthenticatedLayoutProps = { children: ReactNode; className?: string };
 
 export const UnauthenticatedLayout = ({
   children,
+  className,
 }: UnauthenticatedLayoutProps) => (
-  <div className="min-h-screen flex items-center justify-center bg-slate-50 py-12 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-md w-full space-y-8">{children}</div>
-  </div>
+  <div className={clsx('relative', className)}>{children}</div>
 );

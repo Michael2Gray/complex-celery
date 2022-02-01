@@ -1,100 +1,114 @@
 import {
   createContext,
+  ReactNode,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from 'react';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 import { URL_RESOURCE } from '../../shared/constants';
-import { useAxios } from '../../shared/context';
 import { useContextFallback } from '../../shared/hooks';
 import { User } from '../../shared/models';
-import { Auth } from './auth.component';
 import { AuthStatus } from './auth.enum';
-import { AuthLoginRequest, AuthState } from './auth.model';
-import { useLoginMutation } from './auth.queries';
+import { AuthState } from './auth.model';
 
 type AuthContextState = AuthState & {
   token: string | null;
-  login: (params: AuthLoginRequest) => Promise<User>;
-  logout: () => void;
+  user?: User;
+  authenticate: () => Promise<void>;
+  logOut: () => void;
 };
 
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
 AuthContext.displayName = 'AuthContext';
 
-type AuthProviderProps = { initialState?: AuthState };
+type AuthProviderProps = {
+  children: ReactNode;
+  baseURL?: string;
+  initialState?: AuthState;
+};
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({
+export const AuthProvider = ({
   children,
+  baseURL,
   initialState = { status: AuthStatus.PENDING },
-}) => {
-  const axios = useAxios();
-  const loginMutation = useLoginMutation();
-
+}: AuthProviderProps) => {
+  const BASE_URL = `${baseURL}${URL_RESOURCE.AUTH}`;
   const [authState, setAuthState] = useState<AuthState>(initialState);
+  const [user, setUser] = useState<User | undefined>(undefined);
+  const token = localStorage.getItem('token');
+  const logOut = useCallback(() => {
+    setAuthState({ status: AuthStatus.UNAUTHENTICATED });
+  }, []);
 
-  const verifyAuthentication = async () => {
+  const fetchCurrentUser = async () => {
     try {
-      const { data } = await axios.get(`${URL_RESOURCE.AUTH}/authenticate`);
+      setAuthState({ status: AuthStatus.FETCHING_USER });
+
+      const { data: user } = await axios.get(`${BASE_URL}/user`);
+      setAuthState({ status: AuthStatus.AUTHENTICATED });
+      setUser(user);
+    } catch (error) {
+      setAuthState({ status: AuthStatus.ERROR, error });
+    }
+  };
+
+  const authenticate = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`${BASE_URL}/authenticate`);
 
       localStorage.setItem('token', data);
+
+      await fetchCurrentUser();
     } catch (error) {
       localStorage.removeItem('token');
-
       const { response } = error as AxiosError;
 
       if (response && response.data === 'Unauthenticated User') {
-        setAuthState({ status: AuthStatus.UNAUTHENTICATED });
+        logOut();
       } else {
         setAuthState({ status: AuthStatus.ERROR, error });
       }
     }
-  };
-
-  const login = useCallback(async (params: AuthLoginRequest) => {
-    const user = await loginMutation.mutateAsync(params);
-
-    setAuthState({ status: AuthStatus.AUTHENTICATED, user });
-
-    if (user) {
-      verifyAuthentication();
-    }
-
-    return user;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialise = useCallback(() => verifyAuthentication(), []);
+  const verifyAuthentication = useCallback(async () => {
+    if (token) {
+      return await fetchCurrentUser();
+    }
+
+    return await authenticate();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     if (authState.status === AuthStatus.PENDING) {
-      initialise();
+      verifyAuthentication();
     }
 
     if (authState.status === AuthStatus.UNAUTHENTICATED) {
+      setUser(undefined);
       localStorage.removeItem('token');
     }
-  }, [initialise, authState.status]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [authState.status]);
 
   const value = useMemo(
     () => ({
       ...authState,
-      token: localStorage.getItem('token'),
-      login,
-      logout: () => setAuthState({ status: AuthStatus.UNAUTHENTICATED }),
+      token,
+      user,
+      authenticate,
+      logOut,
     }),
-    [authState, login]
+    [authState, authenticate, logOut, token, user]
   );
 
-  return (
-    <AuthContext.Provider value={value}>
-      <Auth>{children}</Auth>
-    </AuthContext.Provider>
-  );
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 
 export const useAuth = () => useContextFallback(AuthContext);

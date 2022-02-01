@@ -3,8 +3,8 @@ import clsx from 'clsx';
 
 export type HeadingProps = {
   level?: 1 | 2 | 3 | 4 | 5 | 6;
-  size?: 'sm' | 'md' | 'lg' | 'xl';
-  variant?: 'default' | 'brand';
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  variant?: 'default' | 'brand' | 'white';
   weight?: 'normal' | 'bold';
   className?: string;
 };
@@ -28,12 +28,14 @@ export const Heading: React.FC<HeadingProps> = ({
       },
       {
         'text-brand-800': variant === 'brand',
+        'text-white': variant === 'white',
       },
       {
         'text-3xl': size === 'xl',
         'text-2xl': size === 'lg',
         'text-xl': size === 'md',
         'text-lg': size === 'sm',
+        'text-md': size === 'xs',
       },
       className
     ),
