@@ -15,10 +15,5 @@ const Template: ComponentStory<typeof WeatherIcon> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  weather: {
-    id: 800,
-    main: 'Clear',
-    description: 'clear sky',
-    icon: '01n',
-  },
+  weather: 'Clear',
 };
