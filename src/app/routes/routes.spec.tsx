@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
 
 import { AuthStatus } from '../modules/auth';
 import { renderWithRouter } from '../shared/utils';
@@ -6,13 +6,17 @@ import { PATHS } from './paths.constants';
 import { AppRoutes } from './routes';
 
 describe('AppRoutes', () => {
-  test('renders the initial city by default', () => {
+  test('renders the initial city by default', async () => {
     renderWithRouter(<AppRoutes />);
+
+    await waitForElementToBeRemoved(() =>
+      screen.getByText('Chopping Celery...')
+    );
 
     expect(screen.getByTestId('pathname')).toHaveValue(PATHS.city);
   });
 
-  test('renders the login if the app has an UNAUTHENTICATED status', () => {
+  test('renders the login if the app has an UNAUTHENTICATED status', async () => {
     renderWithRouter(<AppRoutes />, {
       initialState: { status: AuthStatus.UNAUTHENTICATED },
     });

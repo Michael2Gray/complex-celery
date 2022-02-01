@@ -5,19 +5,17 @@ export const CoordsDirection = ({ value, type }: CoordsDirectionProps) => {
   const positiveDirection = value.toFixed(2);
   const negativeDirection = Math.abs(value).toFixed(2);
 
+  if (sign === -1) {
+    return (
+      <span data-testid="coords-direction">
+        {negativeDirection}°<strong>{type === 'latitude' ? 'S' : 'W'}</strong>
+      </span>
+    );
+  }
+
   return (
-    <>
-      {sign === -1 ? (
-        <>
-          {negativeDirection}°{' '}
-          <span className="font-bold">{type === 'latitude' ? 'S' : 'W'}</span>
-        </>
-      ) : (
-        <>
-          {positiveDirection}°{' '}
-          <span className="font-bold">{type === 'latitude' ? 'N' : 'E'}</span>
-        </>
-      )}
-    </>
+    <span data-testid="coords-direction">
+      {positiveDirection}°<strong>{type === 'latitude' ? 'N' : 'E'}</strong>
+    </span>
   );
 };

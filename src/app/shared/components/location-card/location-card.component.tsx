@@ -29,11 +29,11 @@ export const LocationCard = ({
         className={clsx('absolute h-10 w-10 -top-4 -right-3', {
           'h-16 w-16 -top-9 -right-6': hasLargeWeather,
         })}
-        weather={weather[0]}
+        weather={weather[0].main}
       />
     )}
 
-    <div className="flex items-center p-2">{!!children && <>{children}</>}</div>
+    {!!children && <>{children}</>}
 
     {hasDivider && <Divider />}
   </Card>

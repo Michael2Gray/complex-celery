@@ -9,7 +9,7 @@ export const Distance: React.FC<DistanceProps> = ({
   icon,
   distance,
 }) => (
-  <span className="flex items-center">
+  <span data-testid="distance" className="flex items-center">
     {!!icon && <>{icon}</>}
     <>
       {distance < 100 ? distance.toString() : Math.round(distance).toString()}{' '}

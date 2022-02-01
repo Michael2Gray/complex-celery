@@ -1,12 +1,17 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions } from 'react-query';
 
 import { URL_RESOURCE } from '../../../shared/constants';
 import { useAxios } from '../../../shared/context';
 import { Contract, Weather } from '../../../shared/models';
-import { Station } from '../models';
+import { City, Station } from '../models';
 import { getCitiesFromContracts } from '../utils';
 
-export const useCitiesQuery = (enabled: boolean) => {
+export const useCitiesQuery = (
+  options?: Omit<
+    UseQueryOptions<City[], unknown, City[], string[]>,
+    'queryKey' | 'queryFn'
+  >
+) => {
   const axios = useAxios();
 
   const query = async () => {
@@ -19,7 +24,7 @@ export const useCitiesQuery = (enabled: boolean) => {
     return getCitiesFromContracts(data);
   };
 
-  return useQuery(['contracts'], query, { enabled });
+  return useQuery(['contracts'], query, options);
 };
 
 export const useStationsQuery = (city: string) => {

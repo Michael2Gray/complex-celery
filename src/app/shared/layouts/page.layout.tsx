@@ -9,7 +9,7 @@ export const Page = ({ children }: PageProps) => {
   const { user } = useAuth();
 
   return (
-    <div className="mx-auto max-w-5xl px-10 py-6">
+    <div className="mx-auto max-w-5xl px-10 pb-6">
       <PageTitle>{`Welcome back${user ? ` ${user.name}!` : '!'}`}</PageTitle>
       {children}
     </div>

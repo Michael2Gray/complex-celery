@@ -1,6 +1,4 @@
-import { Config, ConfigProvider } from '../../config';
 import { Login } from '../../modules/login';
-import { AxiosProvider } from '../../shared/context';
 import {
   DefaultLayout,
   FullScreenOverlay,
@@ -9,9 +7,9 @@ import {
 import { useAuth } from './auth.context';
 import { AuthStatus } from './auth.enum';
 
-type AuthProps = { config: Config; children: React.ReactNode };
+type AuthProps = { children: React.ReactNode };
 
-export const Auth = ({ config, children }: AuthProps) => {
+export const Auth = ({ children }: AuthProps) => {
   const auth = useAuth();
   const pendingStatues = [AuthStatus.PENDING, AuthStatus.FETCHING_USER];
 
@@ -27,11 +25,5 @@ export const Auth = ({ config, children }: AuthProps) => {
     return <Login />;
   }
 
-  return (
-    <AxiosProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
-      <ConfigProvider externalConfig={config}>
-        <DefaultLayout>{children}</DefaultLayout>
-      </ConfigProvider>
-    </AxiosProvider>
-  );
+  return <DefaultLayout>{children}</DefaultLayout>;
 };

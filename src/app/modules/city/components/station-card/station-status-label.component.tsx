@@ -1,5 +1,5 @@
-import { Label } from '../../../shared/components';
-import { StationStatus } from '../enums';
+import { Label } from '../../../../shared/components';
+import { StationStatus } from '../../enums';
 
 type StationStatusLabelProps = { status: StationStatus };
 

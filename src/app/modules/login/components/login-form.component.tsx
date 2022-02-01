@@ -1,15 +1,11 @@
 import { UnpackNestedValue, useForm } from 'react-hook-form';
 
 import { Button, Legend, TextField } from '../../../shared/components';
+import { LoginRequest } from '../models';
 import { LoginError } from './login-error.component';
 
-type LoginFormValues = {
-  email: string;
-  password: string;
-};
-
 export type LoginFormSubmitHandler = (
-  data: UnpackNestedValue<LoginFormValues>
+  data: UnpackNestedValue<LoginRequest>
 ) => any | Promise<any>;
 
 type LoginFormProps = {
@@ -27,7 +23,7 @@ export const LoginForm = ({
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<LoginFormValues>();
+  } = useForm<LoginRequest>();
 
   return (
     <form

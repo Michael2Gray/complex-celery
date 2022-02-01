@@ -2,9 +2,9 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { BrowserRouter } from 'react-router-dom';
 
-import { AuthProvider } from './modules/auth';
-import { NotificationsProvider } from './modules/notifications';
-import { Config } from './config';
+import { Auth, AuthProvider } from './modules/auth';
+import { AxiosProvider } from './shared/context';
+import { Config, ConfigProvider } from './config';
 import { AppRoutes } from './routes';
 
 const queryClient = new QueryClient({
@@ -18,17 +18,21 @@ const queryClient = new QueryClient({
 type AppProps = { config: Config };
 
 export const App = ({ config }: AppProps) => (
-  <QueryClientProvider client={queryClient}>
-    <NotificationsProvider>
-      <AuthProvider config={config}>
-        <BrowserRouter>
-          <AppRoutes />
-        </BrowserRouter>
+  <BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
+        <Auth>
+          <AxiosProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
+            <ConfigProvider externalConfig={config}>
+              <AppRoutes />
+            </ConfigProvider>
+          </AxiosProvider>
+        </Auth>
 
         {import.meta.env.VITE_REACT_QUERY_DEVTOOLS === 'true' && (
           <ReactQueryDevtools initialIsOpen={false} />
         )}
       </AuthProvider>
-    </NotificationsProvider>
-  </QueryClientProvider>
+    </QueryClientProvider>
+  </BrowserRouter>
 );

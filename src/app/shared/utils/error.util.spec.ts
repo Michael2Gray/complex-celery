@@ -19,7 +19,7 @@ describe('Error Util', () => {
     message: 'test',
   };
 
-  test.each<[unknown, string]>([
+  test.each([
     [null, DEFAULT_API_ERROR_MESSAGE],
     ['test', DEFAULT_API_ERROR_MESSAGE],
     [new Error('Error'), 'Error'],

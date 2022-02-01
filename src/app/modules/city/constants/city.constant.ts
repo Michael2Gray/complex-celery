@@ -4,6 +4,7 @@ import { City } from '../models';
 
 export const DEFAULT_CITY: City = {
   name: 'dublin',
+  commercial_name: 'dublinbikes',
   country: 'Ireland',
   coords: DEFAULT_COORDS,
 };

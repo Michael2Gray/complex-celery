@@ -3,7 +3,7 @@ import { orderBy as _orderBy } from 'lodash';
 import { Card, Grid, Heading } from '../../../shared/components';
 import { Pending } from '../../../shared/layouts';
 import { useCity } from '../context';
-import { StationCard } from './station-card.component';
+import { StationCard } from './station-card';
 
 export const StationsGrid = () => {
   const { stations, isStationsPending } = useCity();

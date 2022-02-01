@@ -8,11 +8,14 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-import { render } from '@testing-library/react';
+import {
+  render,
+  screen,
+  waitForElementToBeRemoved,
+} from '@testing-library/react';
 
-import { DEFAULT_CONFIG } from '../../config';
-import { AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
-import { NotificationsProvider } from '../../modules/notifications';
+import { ConfigProvider, DEFAULT_CONFIG } from '../../config';
+import { Auth, AuthProvider, AuthState, AuthStatus } from '../../modules/auth';
 import { AxiosProvider } from '../context';
 
 type TestRenderConfig = {
@@ -42,15 +45,17 @@ const DefaultTestProviders = ({
     status: AuthStatus.AUTHENTICATED,
   },
 }: DefaultTestProvidersConfig) => (
-  <AxiosProvider baseURL="/mock-api">
-    <NotificationsProvider>
-      <QueryClientProvider client={queryClient}>
-        <AuthProvider config={DEFAULT_CONFIG} initialState={initialState}>
-          {children}
-        </AuthProvider>
-      </QueryClientProvider>
-    </NotificationsProvider>
-  </AxiosProvider>
+  <QueryClientProvider client={queryClient}>
+    <AuthProvider baseURL="/mock-api" initialState={initialState}>
+      <Auth>
+        <AxiosProvider baseURL="/mock-api">
+          <ConfigProvider externalConfig={DEFAULT_CONFIG}>
+            {children}
+          </ConfigProvider>
+        </AxiosProvider>
+      </Auth>
+    </AuthProvider>
+  </QueryClientProvider>
 );
 
 export const renderWithProviders = (
@@ -101,3 +106,6 @@ export const renderRoute = (
     </Routes>,
     { initialEntries, queryClient, initialState }
   );
+
+export const waitForLoading = async (loadingText = 'Chopping Celery') =>
+  waitForElementToBeRemoved(() => screen.getByText(`${loadingText}...`));

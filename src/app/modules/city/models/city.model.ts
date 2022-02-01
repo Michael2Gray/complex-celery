@@ -2,6 +2,7 @@ import { Coords } from '../../../shared/models';
 
 export type City = {
   name: string;
+  commercial_name: string | null;
   country: string;
   coords: Coords | null;
 };

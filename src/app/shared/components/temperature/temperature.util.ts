@@ -1,9 +1,9 @@
-import { TEMPERATURE_VARIANTS } from './city-card-properties.constant';
+import { TEMPERATURE_VARIANTS } from './temperature.constant';
 
 export const getTempVariant = (
   value: number
 ): keyof typeof TEMPERATURE_VARIANTS => {
-  if (value > 15) {
+  if (value >= 20) {
     return 'high';
   }
 

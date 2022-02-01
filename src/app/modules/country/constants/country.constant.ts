@@ -1,8 +1,9 @@
-import { Coords } from '../../../shared/models';
+import { Coords } from '../../city';
+import { IsoCode } from '../models';
 
-export const DEFAULT_ISO_CODE = 'IE';
+export const DEFAULT_ISO_CODE: IsoCode = 'IE';
 
-export const ISO_COUNTRIES: Record<string, string> = {
+export const ISO_COUNTRIES: Record<IsoCode, string> = {
   AF: 'Afghanistan',
   AX: 'Aland Islands',
   AL: 'Albania',
@@ -248,7 +249,7 @@ export const ISO_COUNTRIES: Record<string, string> = {
   YE: 'Yemen',
   ZM: 'Zambia',
   ZW: 'Zimbabwe',
-};
+} as const;
 
 export const COUNTRY_LAT_LNGS: Record<string, Coords> = {
   Australia: { latitude: -25.2744, longitude: 133.7751 },

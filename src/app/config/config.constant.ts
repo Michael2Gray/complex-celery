@@ -8,6 +8,7 @@ export const DEFAULT_COORDS: Coords = {
 
 export const DEFAULT_FORMATTING: Formatting = {
   date: 'E, d MMM yyyy',
+  dateTime: 'E, d MMM yyy HH:mm:ss',
 };
 
 export const DEFAULT_CONFIG: Config = {

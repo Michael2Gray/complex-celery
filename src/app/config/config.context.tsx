@@ -38,9 +38,9 @@ export const ConfigProvider = ({
   const [config, setConfig] = useState<Config>(DEFAULT_CONFIG);
   const geoLocation = useGeoLocation();
 
-  const { data: cities, isLoading: isCitiesLoading } = useCitiesQuery(
-    auth.status === AuthStatus.AUTHENTICATED
-  );
+  const { data: cities, isLoading: isCitiesLoading } = useCitiesQuery({
+    enabled: auth.status === AuthStatus.AUTHENTICATED,
+  });
 
   useEffect(() => {
     setConfig({

@@ -6,17 +6,17 @@ import {
   DEFAULT_ISO_CODE,
   ISO_COUNTRIES,
 } from '../constants';
-import { Country } from '../models';
+import { Country, IsoCode } from '../models';
 
 export const getCountryFromIsoCode = (code: string): string =>
   Object.prototype.hasOwnProperty.call(ISO_COUNTRIES, code)
-    ? ISO_COUNTRIES[code]
+    ? ISO_COUNTRIES[code as IsoCode]
     : code;
 
 export const getIsoCodeFromCountry = (country: string | undefined): string =>
   country
     ? Object.keys(ISO_COUNTRIES).find(
-        (key) => ISO_COUNTRIES[key] === country
+        (key) => ISO_COUNTRIES[key as IsoCode] === country
       ) ?? DEFAULT_ISO_CODE
     : DEFAULT_ISO_CODE;
 

@@ -15,6 +15,7 @@ export const getCoordsFromCity = (city: string): Coords | null =>
 export const getCitiesFromContracts = (contracts: Contract[]): City[] =>
   contracts.map((contract) => ({
     name: contract.name,
+    commercial_name: contract.commercial_name,
     country: getCountryFromIsoCode(
       !_isEmpty(contract.country_code)
         ? contract.country_code!

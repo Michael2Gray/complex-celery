@@ -4,7 +4,7 @@ import { Country } from '../../models';
 import { CountryIcon } from './country-icon.component';
 
 type CountryFlagProps = {
-  country?: Omit<Country, 'weather'>;
+  country?: Country['name'];
   className?: string;
 };
 
@@ -13,10 +13,6 @@ export const CountryFlag: React.FC<CountryFlagProps> = ({
   className,
 }) => (
   <div className={className}>
-    {country ? (
-      <CountryIcon country={country.name} />
-    ) : (
-      <MdOutlineLocationCity />
-    )}
+    {country ? <CountryIcon country={country} /> : <MdOutlineLocationCity />}
   </div>
 );

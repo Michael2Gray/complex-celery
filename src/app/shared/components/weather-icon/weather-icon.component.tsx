@@ -1,18 +1,18 @@
 import { motion } from 'framer-motion';
 
-import { WeatherInfo } from '../../models';
+import { WeatherInfoMain } from '../../models';
 import { getSvgSrcFromWeatherInfo } from './weather-icon.util';
 
 type WeatherIconProps = {
-  weather?: WeatherInfo;
+  weather?: WeatherInfoMain;
   className?: string;
 };
 
 export const WeatherIcon = ({ weather, className }: WeatherIconProps) => (
   <div className={className}>
     <motion.img
-      src={getSvgSrcFromWeatherInfo(weather?.main)}
-      alt={`Weather ${weather?.main}`}
+      src={getSvgSrcFromWeatherInfo(weather)}
+      alt={`Weather ${weather}`}
     />
   </div>
 );
