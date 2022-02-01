@@ -1,8 +1,8 @@
 import { Login } from '../../modules/login';
 import {
+  DefaultLayout,
   FullScreenOverlay,
   Pending,
-  UnauthenticatedLayout,
 } from '../../shared/layouts';
 import { useAuth } from './auth.context';
 import { AuthStatus } from './auth.enum';
@@ -10,9 +10,10 @@ import { AuthStatus } from './auth.enum';
 type AuthProps = { children: React.ReactNode };
 
 export const Auth = ({ children }: AuthProps) => {
-  const { status } = useAuth();
+  const auth = useAuth();
+  const pendingStatues = [AuthStatus.PENDING, AuthStatus.FETCHING_USER];
 
-  if (status === AuthStatus.PENDING) {
+  if (pendingStatues.includes(auth.status)) {
     return (
       <FullScreenOverlay>
         <Pending>Verifying User...</Pending>
@@ -20,13 +21,9 @@ export const Auth = ({ children }: AuthProps) => {
     );
   }
 
-  if (status === AuthStatus.UNAUTHENTICATED) {
-    return (
-      <UnauthenticatedLayout>
-        <Login />
-      </UnauthenticatedLayout>
-    );
+  if (auth.status === AuthStatus.UNAUTHENTICATED) {
+    return <Login />;
   }
 
-  return <>{children}</>;
+  return <DefaultLayout>{children}</DefaultLayout>;
 };

@@ -1,20 +1,20 @@
 import clsx from 'clsx';
 
 import { useTimeout } from '../../hooks';
+import { AppVariant } from '../../models';
 import { Heading } from '../heading';
-import { ALERT_VARIANTS } from './alert.constant';
-import { AlertVariant } from './alert.model';
+import { ALERT_VARIANTS, HEADING_VARIANTS } from './alert.constant';
 
 type AlertProps = {
   title: React.ReactNode;
-  variant?: AlertVariant;
+  variant?: AppVariant;
   message?: React.ReactNode;
   className?: string;
   onClear: () => void;
 };
 
 export const Alert = ({
-  variant = 'info',
+  variant = 'default',
   title,
   message,
   className,
@@ -27,19 +27,11 @@ export const Alert = ({
 
   return (
     <div
-      className={clsx(
-        'rounded-md p-3',
-        ALERT_VARIANTS[variant].body,
-        className
-      )}
+      className={clsx('rounded-md p-3', ALERT_VARIANTS[variant], className)}
       onMouseEnter={stopTimeout}
       onMouseLeave={startTimeout}
     >
-      <Heading
-        level={2}
-        size="sm"
-        className={clsx(ALERT_VARIANTS[variant].title)}
-      >
+      <Heading level={2} size="sm" className={clsx(HEADING_VARIANTS[variant])}>
         {title}
       </Heading>
       {message && <p className="text-sm">{message}</p>}

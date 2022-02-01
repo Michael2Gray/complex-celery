@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="37" failures="0" errors="0" time="14.223">
+  <testsuite name="AppRoutes" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:40" time="5.085" tests="2">
+    <testcase classname="AppRoutes renders the initial city by default" name="AppRoutes renders the initial city by default" time="0.725">
+    </testcase>
+    <testcase classname="AppRoutes renders the login if the app has an UNAUTHENTICATED status" name="AppRoutes renders the login if the app has an UNAUTHENTICATED status" time="0.14">
+    </testcase>
+  </testsuite>
+  <testsuite name="IconButton" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:45" time="1.539" tests="3">
+    <testcase classname="IconButton has no accessibility violations" name="IconButton has no accessibility violations" time="0.165">
+    </testcase>
+    <testcase classname="IconButton renders a label for screen readers" name="IconButton renders a label for screen readers" time="0.04">
+    </testcase>
+    <testcase classname="IconButton hides the icon and disables the button when isLoading is true" name="IconButton hides the icon and disables the button when isLoading is true" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:40" time="7.849" tests="4">
+    <testcase classname="Login logs a user in successfully" name="Login logs a user in successfully" time="0.985">
+    </testcase>
+    <testcase classname="Login shows errors and focuses the first invalid input when required fields are not provided" name="Login shows errors and focuses the first invalid input when required fields are not provided" time="0.698">
+    </testcase>
+    <testcase classname="Login shows error if there is an invalid email" name="Login shows error if there is an invalid email" time="0.956">
+    </testcase>
+    <testcase classname="Login handles an unsuccessful login" name="Login handles an unsuccessful login" time="0.823">
+    </testcase>
+  </testsuite>
+  <testsuite name="button" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:46" time="1.223" tests="7">
+    <testcase classname="button has no accessibility violations" name="button has no accessibility violations" time="0.101">
+    </testcase>
+    <testcase classname="button invokes the callback on click event" name="button invokes the callback on click event" time="0.031">
+    </testcase>
+    <testcase classname="button renders an icon to the left of the label" name="button renders an icon to the left of the label" time="0.003">
+    </testcase>
+    <testcase classname="button renders an icon to the right of the label" name="button renders an icon to the right of the label" time="0.003">
+    </testcase>
+    <testcase classname="button disables the button when isLoading is true" name="button disables the button when isLoading is true" time="0.032">
+    </testcase>
+    <testcase classname="button hides the icon to the left of the label when isLoading is true" name="button hides the icon to the left of the label when isLoading is true" time="0.004">
+    </testcase>
+    <testcase classname="button hides the icon to the right of the label when isLoading is true" name="button hides the icon to the right of the label when isLoading is true" time="0.004">
+    </testcase>
+  </testsuite>
+  <testsuite name="Input" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:47" time="1.162" tests="4">
+    <testcase classname="Input has no accessibility violations" name="Input has no accessibility violations" time="0.184">
+    </testcase>
+    <testcase classname="Input invokes the callback after on change event" name="Input invokes the callback after on change event" time="0.147">
+    </testcase>
+    <testcase classname="Input renders an icon to the left of the label" name="Input renders an icon to the left of the label" time="0.015">
+    </testcase>
+    <testcase classname="Input renders an icon to the right of the label" name="Input renders an icon to the right of the label" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="FormField" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:48" time="1.161" tests="4">
+    <testcase classname="FormField has no accessibility violations" name="FormField has no accessibility violations" time="0.152">
+    </testcase>
+    <testcase classname="FormField shows error message" name="FormField shows error message" time="0.009">
+    </testcase>
+    <testcase classname="FormField has label" name="FormField has label" time="0.003">
+    </testcase>
+    <testcase classname="FormField invokes the callback after on change event" name="FormField invokes the callback after on change event" time="0.046">
+    </testcase>
+  </testsuite>
+  <testsuite name="App" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:49" time="1.203" tests="1">
+    <testcase classname="App renders" name="App renders" time="0.064">
+    </testcase>
+  </testsuite>
+  <testsuite name="TextButton" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:49" time="1.25" tests="2">
+    <testcase classname="TextButton has no accessibility violations" name="TextButton has no accessibility violations" time="0.074">
+    </testcase>
+    <testcase classname="TextButton invokes the callback on click event" name="TextButton invokes the callback on click event" time="0.028">
+    </testcase>
+  </testsuite>
+  <testsuite name="City" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:40" time="11.17" tests="3">
+    <testcase classname="City renders the details of the city" name="City renders the details of the city" time="3.65">
+    </testcase>
+    <testcase classname="City renders a list of stations" name="City renders a list of stations" time="2.689">
+    </testcase>
+    <testcase classname="City renders an empty message if there are no stations" name="City renders an empty message if there are no stations" time="0.569">
+    </testcase>
+  </testsuite>
+  <testsuite name="StationStatusLabel" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:50" time="0.925" tests="2">
+    <testcase classname="StationStatusLabel renders correctly for the given status &quot;CLOSED&quot;" name="StationStatusLabel renders correctly for the given status &quot;CLOSED&quot;" time="0.005">
+    </testcase>
+    <testcase classname="StationStatusLabel renders correctly for the given status &quot;OPEN&quot;" name="StationStatusLabel renders correctly for the given status &quot;OPEN&quot;" time="0.002">
+    </testcase>
+  </testsuite>
+  <testsuite name="Error Util" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:50" time="0.998" tests="4">
+    <testcase classname="Error Util for null getApiErrorMessage returns &quot;We&apos;re sorry, but something went wrong!&quot;" name="Error Util for null getApiErrorMessage returns &quot;We&apos;re sorry, but something went wrong!&quot;" time="0.002">
+    </testcase>
+    <testcase classname="Error Util for &quot;test&quot; getApiErrorMessage returns &quot;We&apos;re sorry, but something went wrong!&quot;" name="Error Util for &quot;test&quot; getApiErrorMessage returns &quot;We&apos;re sorry, but something went wrong!&quot;" time="0">
+    </testcase>
+    <testcase classname="Error Util for [Error: Error] getApiErrorMessage returns &quot;Error&quot;" name="Error Util for [Error: Error] getApiErrorMessage returns &quot;Error&quot;" time="0.001">
+    </testcase>
+    <testcase classname="Error Util for [Object] getApiErrorMessage returns &quot;Axios Error&quot;" name="Error Util for [Object] getApiErrorMessage returns &quot;Axios Error&quot;" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="StationCard" errors="0" failures="0" skipped="0" timestamp="2022-01-31T14:32:51" time="0.845" tests="1">
+    <testcase classname="StationCard renders the station details" name="StationCard renders the station details" time="0.031">
+    </testcase>
+  </testsuite>
+</testsuites>

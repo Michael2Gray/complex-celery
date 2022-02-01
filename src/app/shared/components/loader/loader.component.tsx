@@ -13,7 +13,7 @@ export const Loader = ({ size = 'md' }: LoaderProps) => (
     })}
   >
     <motion.div
-      className={clsx('absolute bg-current', {
+      className={clsx('absolute bg-brand-400', {
         'w-1.5 h-1.5': size === 'md',
         'w-1 h-1': size === 'sm',
       })}

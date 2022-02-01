@@ -1,8 +1,11 @@
-import { User } from '../../shared/models';
 import { AuthStatus } from './auth.enum';
 
 type PendingState = {
   status: AuthStatus.PENDING;
+};
+
+type FetchingUserState = {
+  status: AuthStatus.FETCHING_USER;
 };
 
 type ErrorState = {
@@ -16,11 +19,11 @@ type LoginState = {
 
 type AuthenticatedState = {
   status: AuthStatus.AUTHENTICATED;
-  user: User;
 };
 
 export type AuthState =
   | PendingState
+  | FetchingUserState
   | ErrorState
   | LoginState
   | AuthenticatedState;

@@ -1,23 +1,19 @@
 import { ReactNode } from 'react';
 
-import { Notifications } from '../../modules/notifications';
-import { Menu } from './menu.layout';
+import { Branding } from '../components';
 
 type DefaultLayoutProps = { children: ReactNode };
 
 export const DefaultLayout = ({ children }: DefaultLayoutProps) => (
-  <div className="flex">
-    <div className="flex-none">
-      <Menu />
-    </div>
-    <main className="flex-1 min-w-0">
-      <div className="sticky top-0 z-10">
-        <div className="relative z-10" />
-        <div className="absolute w-full">
-          <Notifications />
-        </div>
-      </div>
-      {children}
-    </main>
+  <div className="bg-default-pattern flex flex-col">
+    <Branding
+      className="p-6"
+      size="xs"
+      variant="white"
+      withContent
+      withSubTitle
+    />
+
+    <main className="flex-1 min-w-0">{children}</main>
   </div>
 );
