@@ -1,14 +1,11 @@
 import { useConfig } from '../../../config';
 import { Page } from '../../../shared/layouts';
-import {
-  CountriesConsumer,
-  CountriesProvider,
-  DEFAULT_ISO_CODE,
-} from '../../country';
-import { City } from '../components';
-import { CityProvider } from '../context';
+import { City } from '../../city/components';
+import { CityProvider } from '../../city/context';
+import { DEFAULT_ISO_CODE } from '../../country/constants';
+import { CountriesConsumer, CountriesProvider } from '../../country/context';
 
-export const CityRoute = () => {
+export const HomeRoute = () => {
   const { city } = useConfig();
 
   return (

@@ -17,6 +17,7 @@ export * from './label';
 export * from './legend';
 export * from './loader';
 export * from './location-card';
+export * from './nav-link';
 export * from './page-title';
 export * from './property';
 export * from './temperature';

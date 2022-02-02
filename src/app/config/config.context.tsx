@@ -1,12 +1,10 @@
 import { createContext, ReactNode, useEffect, useMemo, useState } from 'react';
 
 import { AuthStatus, useAuth } from '../modules/auth';
-import {
-  City,
-  DEFAULT_CITY,
-  getNearestCity,
-  useCitiesQuery,
-} from '../modules/city';
+import { DEFAULT_CITY } from '../modules/city/constants';
+import { City } from '../modules/city/models';
+import { useCitiesQuery } from '../modules/city/queries';
+import { getNearestCity } from '../modules/city/utils';
 import { useContextFallback, useGeoLocation } from '../shared/hooks';
 import { FullScreenOverlay, Pending } from '../shared/layouts';
 import { DEFAULT_CONFIG } from './config.constant';

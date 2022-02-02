@@ -3,7 +3,10 @@ import { isEmpty as _isEmpty } from 'lodash';
 import { DEFAULT_COORDS } from '../../../config';
 import { Contract, Coords } from '../../../shared/models';
 import { getDistanceBetweenCoords } from '../../../shared/utils';
-import { getCountryFromIsoCode, getKnownNullCountry } from '../../country';
+import {
+  getCountryFromIsoCode,
+  getKnownNullCountry,
+} from '../../country/utils';
 import { CITY_LAT_LNGS } from '../constants';
 import { City, CityKnownNull } from '../models';
 

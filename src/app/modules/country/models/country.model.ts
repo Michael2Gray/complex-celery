@@ -1,5 +1,5 @@
 import { Coords, Weather } from '../../../shared/models';
-import { City, EnhancedCity } from '../../city';
+import { City, EnhancedCity } from '../../city/models';
 
 export type Country = {
   name: string;

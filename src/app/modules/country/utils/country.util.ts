@@ -1,6 +1,6 @@
 import { groupBy as _groupBy, orderBy as _orderBy } from 'lodash';
 
-import { City } from '../../city';
+import { City } from '../../city/models';
 import {
   COUNTRY_LAT_LNGS,
   DEFAULT_ISO_CODE,

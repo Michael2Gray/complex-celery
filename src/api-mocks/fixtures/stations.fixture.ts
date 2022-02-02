@@ -1,4 +1,5 @@
-import { Station, StationStatus } from '../../app/modules/city';
+import { StationStatus } from '../../app/modules/city/enums';
+import { Station } from '../../app/modules/city/models';
 
 export const STATIONS: Station[] = [
   {

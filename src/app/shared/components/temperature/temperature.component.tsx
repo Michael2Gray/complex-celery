@@ -7,9 +7,9 @@ type TemperatureProps = { temperature: number };
 
 export const Temperature = ({ temperature }: TemperatureProps) => (
   <div data-testid="temperature">
-    <div className={clsx(TEMPERATURE_VARIANTS[getTempVariant(temperature)])}>
+    <span className={clsx(TEMPERATURE_VARIANTS[getTempVariant(temperature)])}>
       {Math.round(temperature)}
-    </div>
+    </span>
     °C
   </div>
 );
