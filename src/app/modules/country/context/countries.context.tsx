@@ -2,6 +2,7 @@ import { createContext, ReactNode, useMemo } from 'react';
 
 import { useConfig } from '../../../config';
 import { useContextFallback } from '../../../shared/hooks';
+import { City } from '../../city/models';
 import { Country } from '../models';
 import { getCountriesFromCities, getIsoCodeFromCountry } from '../utils';
 
@@ -16,10 +17,14 @@ const CountriesContext = createContext<CountriesContextState | undefined>(
 );
 CountriesContext.displayName = 'CountriesContext';
 
-type CountriesProviderProps = { children: ReactNode };
+type CountriesProviderProps = { city?: City; children: ReactNode };
 
-export const CountriesProvider = ({ children }: CountriesProviderProps) => {
-  const { city, cities } = useConfig();
+export const CountriesProvider = ({
+  children,
+  ...props
+}: CountriesProviderProps) => {
+  const { cities, city: configCity } = useConfig();
+  const city = props.city ?? configCity;
   const countries = getCountriesFromCities(cities);
   const country = countries.find((country) =>
     country.cities.map(({ name }) => name).includes(city.name.toLowerCase())

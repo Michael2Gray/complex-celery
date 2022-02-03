@@ -1,6 +1,7 @@
 export const PATHS = {
   home: '/',
-  city: '/city/:city',
+  cities: '/cities',
+  city: '/cities/:city',
   countries: '/countries',
   country: '/countries/:country',
 } as const;

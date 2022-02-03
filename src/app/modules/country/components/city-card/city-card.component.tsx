@@ -28,7 +28,9 @@ export const CityCard = ({ city }: CityCardProps) => {
   );
 
   const path =
-    city?.name === configCity.name ? PATHS.home : `${PATHS.city}/${city?.name}`;
+    city?.name === configCity.name
+      ? PATHS.home
+      : `${PATHS.cities}/${city?.name}`;
 
   return (
     <LocationCard
