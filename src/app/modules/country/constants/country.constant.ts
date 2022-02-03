@@ -1,4 +1,4 @@
-import { Coords } from '../../city/models';
+import { Coords } from '../../../shared/models';
 import { IsoCode } from '../models';
 
 export const DEFAULT_ISO_CODE: IsoCode = 'IE';
