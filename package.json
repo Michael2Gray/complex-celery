@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "scripts": {
     "prepare": "husky install",
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "cross-env TZ=utc jest",
@@ -79,7 +79,8 @@
     "prettier": "2.5.1",
     "tailwindcss": "^3.0.13",
     "typescript": "^4.4.4",
-    "vite": "^2.7.2"
+    "vite": "^2.7.2",
+    "vite-plugin-html-env": "^1.0.3"
   },
   "msw": {
     "workerDirectory": "public"
