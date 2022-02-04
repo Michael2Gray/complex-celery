@@ -11,14 +11,17 @@ import axios, { AxiosError } from 'axios';
 import { URL_RESOURCE } from '../../shared/constants';
 import { useContextFallback } from '../../shared/hooks';
 import { User } from '../../shared/models';
+import { getApiErrorMessage } from '../../shared/utils';
 import { AuthStatus } from './auth.enum';
-import { AuthState } from './auth.model';
+import { AuthLoginRequest, AuthState } from './auth.model';
 
 type AuthContextState = AuthState & {
   token: string | null;
   user?: User;
-  authenticate: () => Promise<void>;
+  loginError?: string;
+  login: (params: AuthLoginRequest) => Promise<unknown>;
   logOut: () => void;
+  clearLoginError: () => void;
 };
 
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
@@ -39,6 +42,18 @@ export const AuthProvider = ({
   const [authState, setAuthState] = useState<AuthState>(initialState);
   const [user, setUser] = useState<User | undefined>(undefined);
   const token = localStorage.getItem('token');
+  const [loginError, setLoginError] = useState<string>();
+
+  const login = useCallback(async (values: AuthLoginRequest) => {
+    try {
+      await axios.post(`${BASE_URL}/login`, values);
+      authenticate();
+    } catch (error) {
+      setLoginError(getApiErrorMessage(error));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const logOut = useCallback(() => {
     setAuthState({ status: AuthStatus.UNAUTHENTICATED });
   }, []);
@@ -102,10 +117,12 @@ export const AuthProvider = ({
       ...authState,
       token,
       user,
-      authenticate,
+      loginError,
+      login,
       logOut,
+      clearLoginError: () => setLoginError(undefined),
     }),
-    [authState, authenticate, logOut, token, user]
+    [authState, token, user, loginError, login, logOut]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
