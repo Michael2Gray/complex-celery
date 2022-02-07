@@ -41,7 +41,7 @@ export const useStationsQuery = (city: string) => {
     return data;
   };
 
-  return useQuery('stationsByCity', query);
+  return useQuery(['stations', city], query);
 };
 
 export const useWeatherQuery = (location?: string) => {
@@ -59,5 +59,5 @@ export const useWeatherQuery = (location?: string) => {
     return data;
   };
 
-  return useQuery('weather', query);
+  return useQuery(['weather', location], query);
 };
