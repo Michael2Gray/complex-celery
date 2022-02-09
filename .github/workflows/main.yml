@@ -49,6 +49,15 @@ jobs:
       - name: Test
         run: yarn test:coverage
 
+      - name: Build
+        run: yarn run build
+
+  reporting:
+    name: Reporting
+    needs: quality
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Test Reporting
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
@@ -57,29 +66,15 @@ jobs:
       - name: Add to codecov
         uses: codecov/codecov-action@v2
 
-      - name: Build
-        run: yarn run build
-
-      - name: Upload build files
-        uses: actions/upload-artifact@v2
-        with:
-          name: dist
-          path: ./dist
-
   deploy:
     name: Deploy
     needs: quality
     runs-on: ubuntu-latest
 
     steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v2
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
         with:
-          name: dist
-          path: ./dist
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+          heroku_app_name: 'complex-celery-github'
+          heroku_email: 'michael2.gray@gmail.com'
