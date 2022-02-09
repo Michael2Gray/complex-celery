@@ -1,5 +1,7 @@
 # Complex Celery
 
+[![codecov](https://codecov.io/gh/Michael2Gray/complex-celery/branch/master/graph/badge.svg?token=LQJGGFQQX3)](https://codecov.io/gh/Michael2Gray/complex-celery)
+
 ## Configuration
 
 Project confguration can be set using environment variables or `.env` files as described in [vite documentation](https://vitejs.dev/guide/env-and-mode.html#env-files). The defaults are provided in [.env](./.env) file.
