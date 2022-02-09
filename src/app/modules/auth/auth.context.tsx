@@ -9,7 +9,7 @@ import {
 import axios, { AxiosError } from 'axios';
 
 import { URL_RESOURCE } from '../../shared/constants';
-import { useContextFallback } from '../../shared/hooks';
+import { useContextFallback, useMounted } from '../../shared/hooks';
 import { User } from '../../shared/models';
 import { getApiErrorMessage } from '../../shared/utils';
 import { AuthStatus } from './auth.enum';
@@ -29,16 +29,15 @@ AuthContext.displayName = 'AuthContext';
 
 type AuthProviderProps = {
   children: ReactNode;
-  baseURL?: string;
   initialState?: AuthState;
 };
 
 export const AuthProvider = ({
   children,
-  baseURL,
   initialState = { status: AuthStatus.PENDING },
 }: AuthProviderProps) => {
-  const BASE_URL = `${baseURL}${URL_RESOURCE.AUTH}`;
+  const isMounted = useMounted();
+  const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.AUTH}`;
   const [authState, setAuthState] = useState<AuthState>(initialState);
   const [user, setUser] = useState<User | undefined>(undefined);
   const token = localStorage.getItem('token');
@@ -59,14 +58,15 @@ export const AuthProvider = ({
   }, []);
 
   const fetchCurrentUser = async () => {
-    try {
-      setAuthState({ status: AuthStatus.FETCHING_USER });
-
-      const { data: user } = await axios.get(`${BASE_URL}/user`);
-      setAuthState({ status: AuthStatus.AUTHENTICATED });
-      setUser(user);
-    } catch (error) {
-      setAuthState({ status: AuthStatus.ERROR, error });
+    if (isMounted()) {
+      setAuthState(() => ({ status: AuthStatus.FETCHING_USER }));
+      try {
+        const { data: user } = await axios.get(`${BASE_URL}/user`);
+        setAuthState({ status: AuthStatus.AUTHENTICATED });
+        setUser(user);
+      } catch (error) {
+        setAuthState({ status: AuthStatus.ERROR, error });
+      }
     }
   };
 

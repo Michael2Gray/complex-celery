@@ -1,4 +1,4 @@
-import React from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import {
   generatePath,
@@ -35,7 +35,7 @@ const RouteLocation = () => {
 };
 
 type DefaultTestProvidersConfig = {
-  children: React.ReactNode;
+  children: ReactNode;
 } & TestRenderConfig;
 
 const DefaultTestProviders = ({
@@ -46,9 +46,9 @@ const DefaultTestProviders = ({
   },
 }: DefaultTestProvidersConfig) => (
   <QueryClientProvider client={queryClient}>
-    <AuthProvider baseURL="/mock-api" initialState={initialState}>
+    <AuthProvider initialState={initialState}>
       <Auth>
-        <AxiosProvider baseURL="/mock-api">
+        <AxiosProvider>
           <ConfigProvider externalConfig={DEFAULT_CONFIG}>
             {children}
           </ConfigProvider>
@@ -59,7 +59,7 @@ const DefaultTestProviders = ({
 );
 
 export const renderWithProviders = (
-  ui: React.ReactElement,
+  ui: ReactElement,
   { queryClient, initialState }: TestRenderConfig = {}
 ) =>
   render(
@@ -73,7 +73,7 @@ type RenderWithRouterConfig = TestRenderConfig & {
 };
 
 export const renderWithRouter = (
-  ui: React.ReactElement,
+  ui: ReactElement,
   { queryClient, initialEntries, initialState }: RenderWithRouterConfig = {}
 ) =>
   renderWithProviders(
@@ -90,7 +90,7 @@ type RenderRouteConfig = {
 } & RenderWithRouterConfig;
 
 export const renderRoute = (
-  ui: React.ReactElement,
+  ui: ReactElement,
   {
     path = '/',
     params,

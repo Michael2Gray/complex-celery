@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "cross-env TZ=utc jest",
+    "test": "cross-env TZ=utc VITE_API_BASE_URL=/mock-api jest",
     "test:coverage": "yarn test --coverage",
     "test:watch": "yarn test --watchAll",
     "format": "prettier --write .",

@@ -1,8 +1,8 @@
-import React from 'react';
+import { ReactElement } from 'react';
 import clsx from 'clsx';
 
 export type InputIconWrapperProps = {
-  icon: React.ReactElement;
+  icon: ReactElement;
   iconPosition: 'start' | 'end';
 };
 

@@ -1,5 +1,7 @@
+import { ReactNode } from 'react';
+
 type FullScreenOverlayProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 export const FullScreenOverlay = ({ children }: FullScreenOverlayProps) => (

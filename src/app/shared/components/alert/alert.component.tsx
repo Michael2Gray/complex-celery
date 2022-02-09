@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import clsx from 'clsx';
 
 import { useTimeout } from '../../hooks';
@@ -6,9 +7,9 @@ import { Heading } from '../heading';
 import { ALERT_VARIANTS, HEADING_VARIANTS } from './alert.constant';
 
 type AlertProps = {
-  title: React.ReactNode;
+  title: ReactNode;
   variant?: AppVariant;
-  message?: React.ReactNode;
+  message?: ReactNode;
   className?: string;
   onClear: () => void;
 };

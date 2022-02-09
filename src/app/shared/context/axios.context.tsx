@@ -1,4 +1,4 @@
-import React, { createContext, useMemo } from 'react';
+import { createContext, ReactNode, useMemo } from 'react';
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 import { useAuth } from '../../modules/auth';
@@ -8,17 +8,16 @@ const AxiosContext = createContext<AxiosInstance | undefined>(axios);
 AxiosContext.displayName = 'AxiosContext';
 
 type AxiosProviderProps = {
-  baseURL?: string;
+  children: ReactNode;
 };
 
-export const AxiosProvider: React.FC<AxiosProviderProps> = ({
-  children,
-  baseURL,
-}) => {
+export const AxiosProvider = ({ children }: AxiosProviderProps) => {
   const { token } = useAuth();
 
   const value = useMemo(() => {
-    const instance = axios.create({ baseURL });
+    const instance = axios.create({
+      baseURL: import.meta.env.VITE_API_BASE_URL,
+    });
 
     const requestInterceptor = async (config: AxiosRequestConfig) => {
       config.headers = {
@@ -32,7 +31,7 @@ export const AxiosProvider: React.FC<AxiosProviderProps> = ({
     instance.interceptors.request.use(requestInterceptor);
 
     return instance;
-  }, [baseURL, token]);
+  }, [token]);
 
   return (
     <AxiosContext.Provider value={value}>{children}</AxiosContext.Provider>

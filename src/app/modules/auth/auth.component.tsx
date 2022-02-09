@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { Login } from '../../modules/login';
 import {
   DefaultLayout,
@@ -7,7 +9,7 @@ import {
 import { useAuth } from './auth.context';
 import { AuthStatus } from './auth.enum';
 
-type AuthProps = { children: React.ReactNode };
+type AuthProps = { children: ReactNode };
 
 export const Auth = ({ children }: AuthProps) => {
   const auth = useAuth();

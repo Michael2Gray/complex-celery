@@ -1,7 +1,9 @@
+import { ReactNode } from 'react';
+
 import { Alert } from '../../../shared/components';
 
 type LoginErrorProps = {
-  error: React.ReactNode;
+  error: ReactNode;
   onClear: () => void;
 };
 
