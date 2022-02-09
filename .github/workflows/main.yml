@@ -1,4 +1,4 @@
-name: Complex Celery
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master, develop, release/*]
 
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
 
     steps:
