@@ -49,11 +49,14 @@ jobs:
       - name: Test
         run: yarn test:coverage
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.27
-        if: always()
+      - name: Code Coverage
+        uses: zgosalvez/github-actions-report-lcov@v1
         with:
-          files: reports/junit.xml
+          coverage-files: coverage/lcov.*.info
+          minimum-coverage: 80
+          artifact-name: code-coverage-report
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          working-directory: src/app
 
       - name: Build
         run: yarn run build
