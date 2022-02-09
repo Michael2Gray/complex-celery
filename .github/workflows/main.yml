@@ -50,7 +50,7 @@ jobs:
         run: yarn test:coverage
 
       - name: Code Coverage
-        uses: romeovs/lcov-reporter-action@v0.2.16
+        uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: ./coverage/lcov.info
           github-token: ${{ secrets.CODECOV_TOKEN }}
