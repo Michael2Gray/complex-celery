@@ -1,6 +1,6 @@
 # Complex Celery
 
-[![codecov](https://codecov.io/gh/Michael2Gray/complex-celery/branch/master/graph/badge.svg?token=LQJGGFQQX3)](https://codecov.io/gh/Michael2Gray/complex-celery)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![main workflow](https://github.com/Michael2Gray/complex-celery/actions/workflows/main.yml/badge.svg) [![codecov](https://codecov.io/gh/Michael2Gray/complex-celery/branch/master/graph/badge.svg?token=LQJGGFQQX3)](https://codecov.io/gh/Michael2Gray/complex-celery) [![Maintainability](https://api.codeclimate.com/v1/badges/07e9bdd66a91b1fe08ca/maintainability)](https://codeclimate.com/github/Michael2Gray/complex-celery/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/07e9bdd66a91b1fe08ca/test_coverage)](https://codeclimate.com/github/Michael2Gray/complex-celery/test_coverage) [![Total alerts](https://img.shields.io/lgtm/alerts/g/Michael2Gray/complex-celery.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Michael2Gray/complex-celery/alerts/) [![Known Vulnerabilities](https://snyk.io/test/github/Michael2Gray/complex-celery/badge.svg)](https://snyk.io/test/github/Michael2Gray/complex-celery)
 
 ## Configuration
 

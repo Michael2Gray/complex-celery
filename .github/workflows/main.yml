@@ -58,6 +58,13 @@ jobs:
         with:
           lcov-file: ./coverage/lcov.info
 
+      - name: CodeClimate
+        uses: paambaati/codeclimate-action@v2.2.4
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_ID }}
+        with:
+          coverageCommand: yarn:coverage
+
       - name: Add to codecov
         uses: codecov/codecov-action@v2
 
