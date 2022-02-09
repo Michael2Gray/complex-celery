@@ -8,10 +8,7 @@ type CountryFlagProps = {
   className?: string;
 };
 
-export const CountryFlag: React.FC<CountryFlagProps> = ({
-  country,
-  className,
-}) => (
+export const CountryFlag = ({ country, className }: CountryFlagProps) => (
   <div className={className}>
     {country ? <CountryIcon country={country} /> : <MdOutlineLocationCity />}
   </div>

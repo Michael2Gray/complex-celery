@@ -1,14 +1,12 @@
+import { ReactNode } from 'react';
+
 type DistanceProps = {
   distance: number;
   unit?: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
 };
 
-export const Distance: React.FC<DistanceProps> = ({
-  unit = 'km',
-  icon,
-  distance,
-}) => (
+export const Distance = ({ unit = 'km', icon, distance }: DistanceProps) => (
   <span data-testid="distance" className="flex items-center">
     {!!icon && <>{icon}</>}
     <>

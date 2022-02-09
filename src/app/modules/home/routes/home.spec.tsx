@@ -4,11 +4,11 @@ import { rest } from 'msw';
 import { getStations } from '../../../../api-mocks/handlers/stations.handler';
 import { server } from '../../../../api-mocks/server';
 import { renderRoute, waitForLoading } from '../../../shared/utils';
-import { CityRoute } from './city.route';
+import { HomeRoute } from './home.route';
 
-describe('City', () => {
+describe('Home', () => {
   test('renders the details of the city', async () => {
-    renderRoute(<CityRoute />);
+    renderRoute(<HomeRoute />);
 
     await waitForLoading();
 
@@ -25,7 +25,7 @@ describe('City', () => {
   });
 
   test('renders a list of stations', async () => {
-    renderRoute(<CityRoute />);
+    renderRoute(<HomeRoute />);
 
     await waitForLoading();
 
@@ -49,7 +49,7 @@ describe('City', () => {
       )
     );
 
-    renderRoute(<CityRoute />);
+    renderRoute(<HomeRoute />);
 
     await waitForLoading();
 

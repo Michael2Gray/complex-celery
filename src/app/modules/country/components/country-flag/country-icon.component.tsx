@@ -8,7 +8,7 @@ type CountryIconProps = {
   className?: string;
 };
 
-export const CountryIcon: React.FC<CountryIconProps> = ({ country }) => {
+export const CountryIcon = ({ country }: CountryIconProps) => {
   const { countries } = useCountries();
 
   return (

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { ChangeEvent, FocusEvent, forwardRef } from 'react';
 import clsx from 'clsx';
 
 import { InputIconWrapper, InputIconWrapperProps } from './components';
@@ -7,8 +7,8 @@ export type InputProps = {
   placeholder?: string;
   value?: string;
   defaultValue?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: FocusEvent<HTMLInputElement>) => void;
   type?: 'text' | 'password' | 'email';
   id?: string;
   name?: string;

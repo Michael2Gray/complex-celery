@@ -8,7 +8,7 @@ export const StationCardFooter = ({
   status,
   lastUpdate,
 }: StationCardFooterProps) => (
-  <div className="flex justify-between">
+  <div className="flex justify-between items-center">
     <DateFormat date={lastUpdate} withTime />
 
     <StationStatusLabel status={status} />

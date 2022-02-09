@@ -1,4 +1,4 @@
-name: Complex Celery
+name: CI
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [master, develop, release/*]
 
 jobs:
-  build:
+  quality:
     runs-on: ubuntu-latest
 
     steps:
@@ -47,13 +47,39 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test --coverage
+        run: yarn test:coverage
+
+      - name: Test Reporting
+        uses: romeovs/lcov-reporter-action@v0.3.1
+        with:
+          lcov-file: ./coverage/lcov.info
+
+      - name: Add to codecov
+        uses: codecov/codecov-action@v2
 
       - name: Build
         run: yarn run build
 
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.27
-        if: always()
+      - name: Upload build files
+        uses: actions/upload-artifact@v2
         with:
-          files: reports/junit.xml
+          name: dist
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
+          path: ./dist
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist

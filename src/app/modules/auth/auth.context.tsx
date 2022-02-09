@@ -9,16 +9,19 @@ import {
 import axios, { AxiosError } from 'axios';
 
 import { URL_RESOURCE } from '../../shared/constants';
-import { useContextFallback } from '../../shared/hooks';
+import { useContextFallback, useMounted } from '../../shared/hooks';
 import { User } from '../../shared/models';
+import { getApiErrorMessage } from '../../shared/utils';
 import { AuthStatus } from './auth.enum';
-import { AuthState } from './auth.model';
+import { AuthLoginRequest, AuthState } from './auth.model';
 
 type AuthContextState = AuthState & {
   token: string | null;
   user?: User;
-  authenticate: () => Promise<void>;
+  loginError?: string;
+  login: (params: AuthLoginRequest) => Promise<unknown>;
   logOut: () => void;
+  clearLoginError: () => void;
 };
 
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
@@ -26,32 +29,44 @@ AuthContext.displayName = 'AuthContext';
 
 type AuthProviderProps = {
   children: ReactNode;
-  baseURL?: string;
   initialState?: AuthState;
 };
 
 export const AuthProvider = ({
   children,
-  baseURL,
   initialState = { status: AuthStatus.PENDING },
 }: AuthProviderProps) => {
-  const BASE_URL = `${baseURL}${URL_RESOURCE.AUTH}`;
+  const isMounted = useMounted();
+  const BASE_URL = `${import.meta.env.VITE_API_BASE_URL}${URL_RESOURCE.AUTH}`;
   const [authState, setAuthState] = useState<AuthState>(initialState);
   const [user, setUser] = useState<User | undefined>(undefined);
   const token = localStorage.getItem('token');
+  const [loginError, setLoginError] = useState<string>();
+
+  const login = useCallback(async (values: AuthLoginRequest) => {
+    try {
+      await axios.post(`${BASE_URL}/login`, values);
+      authenticate();
+    } catch (error) {
+      setLoginError(getApiErrorMessage(error));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const logOut = useCallback(() => {
     setAuthState({ status: AuthStatus.UNAUTHENTICATED });
   }, []);
 
   const fetchCurrentUser = async () => {
-    try {
-      setAuthState({ status: AuthStatus.FETCHING_USER });
-
-      const { data: user } = await axios.get(`${BASE_URL}/user`);
-      setAuthState({ status: AuthStatus.AUTHENTICATED });
-      setUser(user);
-    } catch (error) {
-      setAuthState({ status: AuthStatus.ERROR, error });
+    if (isMounted()) {
+      setAuthState(() => ({ status: AuthStatus.FETCHING_USER }));
+      try {
+        const { data: user } = await axios.get(`${BASE_URL}/user`);
+        setAuthState({ status: AuthStatus.AUTHENTICATED });
+        setUser(user);
+      } catch (error) {
+        setAuthState({ status: AuthStatus.ERROR, error });
+      }
     }
   };
 
@@ -102,10 +117,12 @@ export const AuthProvider = ({
       ...authState,
       token,
       user,
-      authenticate,
+      loginError,
+      login,
       logOut,
+      clearLoginError: () => setLoginError(undefined),
     }),
-    [authState, authenticate, logOut, token, user]
+    [authState, token, user, loginError, login, logOut]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

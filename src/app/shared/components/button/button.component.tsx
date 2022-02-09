@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, ReactElement } from 'react';
 import clsx from 'clsx';
 
 import { Loader } from '../loader';
@@ -14,8 +14,8 @@ const sizes = {
 };
 
 type IconProps =
-  | { startIcon: React.ReactElement; endIcon?: never }
-  | { endIcon: React.ReactElement; startIcon?: never }
+  | { startIcon: ReactElement; endIcon?: never }
+  | { endIcon: ReactElement; startIcon?: never }
   | { endIcon?: undefined; startIcon?: undefined };
 
 export type ButtonProps = ButtonBasePublicProps & IconProps;

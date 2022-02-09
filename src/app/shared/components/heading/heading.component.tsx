@@ -1,4 +1,4 @@
-import React from 'react';
+import { createElement, ReactNode } from 'react';
 import clsx from 'clsx';
 
 export type HeadingProps = {
@@ -7,9 +7,10 @@ export type HeadingProps = {
   variant?: 'default' | 'brand' | 'white';
   weight?: 'normal' | 'bold';
   className?: string;
+  children: ReactNode;
 };
 
-export const Heading: React.FC<HeadingProps> = ({
+export const Heading = ({
   level = 1,
   size = 'lg',
   variant = 'default',
@@ -17,8 +18,8 @@ export const Heading: React.FC<HeadingProps> = ({
   className,
   children,
   ...rest
-}) =>
-  React.createElement(`h${level}`, {
+}: HeadingProps) =>
+  createElement(`h${level}`, {
     children,
     className: clsx(
       'tracking-wide font-mono',

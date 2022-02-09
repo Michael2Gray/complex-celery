@@ -1,6 +1,5 @@
+import { Coords } from '../../../shared/models';
 import { StationStatus } from '../enums';
-
-export type Coords = Pick<GeolocationCoordinates, 'latitude' | 'longitude'>;
 
 export type Availability = {
   bikes: number;

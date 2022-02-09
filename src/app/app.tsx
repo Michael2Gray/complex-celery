@@ -20,9 +20,9 @@ type AppProps = { config: Config };
 export const App = ({ config }: AppProps) => (
   <BrowserRouter>
     <QueryClientProvider client={queryClient}>
-      <AuthProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
+      <AuthProvider>
         <Auth>
-          <AxiosProvider baseURL={import.meta.env.VITE_API_BASE_URL}>
+          <AxiosProvider>
             <ConfigProvider externalConfig={config}>
               <AppRoutes />
             </ConfigProvider>

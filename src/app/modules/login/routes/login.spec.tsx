@@ -28,7 +28,7 @@ describe('Login', () => {
     userEvent.click(screen.getByRole('button', { name: 'Login' }));
 
     await waitFor(() => {
-      expect(screen.getByTestId('pathname')).toHaveValue(PATHS.city);
+      expect(screen.getByTestId('pathname')).toHaveValue(PATHS.home);
     });
   });
 

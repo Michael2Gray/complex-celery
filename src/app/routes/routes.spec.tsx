@@ -6,14 +6,14 @@ import { PATHS } from './paths.constants';
 import { AppRoutes } from './routes';
 
 describe('AppRoutes', () => {
-  test('renders the initial city by default', async () => {
+  test('renders the initial home route by default', async () => {
     renderWithRouter(<AppRoutes />);
 
     await waitForElementToBeRemoved(() =>
       screen.getByText('Chopping Celery...')
     );
 
-    expect(screen.getByTestId('pathname')).toHaveValue(PATHS.city);
+    expect(screen.getByTestId('pathname')).toHaveValue(PATHS.home);
   });
 
   test('renders the login if the app has an UNAUTHENTICATED status', async () => {

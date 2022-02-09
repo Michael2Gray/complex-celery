@@ -1,4 +1,4 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import clsx from 'clsx';
 
 import { Loader } from '../loader';
@@ -20,7 +20,7 @@ export type IconButtonProps = ButtonBasePublicProps & {
   label: string;
 };
 
-export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ children, size = 'md', label, isLoading, ...props }, ref) => (
     <ButtonBase
       ref={ref}
