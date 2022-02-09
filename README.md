@@ -1,6 +1,8 @@
 # Complex Celery
 
-[![codecov](https://codecov.io/gh/Michael2Gray/complex-celery/branch/master/graph/badge.svg?token=LQJGGFQQX3)](https://codecov.io/gh/Michael2Gray/complex-celery)
+[![codecov](https://codecov.io/gh/Michael2Gray/complex-celery/branch/master/graph/badge.svg?token=LQJGGFQQX3)](https://codecov.io/gh/Michael2Gray/complex-celery) ![Profile Views](https://komarev.com/ghpvc/?username=Michael2Gray)
+
+![Contributors](https://contrib.rocks/image?repo=Michael2Gray/complex-celery)
 
 ## Configuration
 
