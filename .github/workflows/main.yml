@@ -12,7 +12,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: codecov/codecov-action@v2
 
       - name: Read .nvmrc
         id: nvm
@@ -50,10 +49,13 @@ jobs:
       - name: Test
         run: yarn test:coverage
 
-      - name: Code Coverage
+      - name: Test Reporting
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: ./coverage/lcov.info
+
+      - name: Add to codecov
+        uses: codecov/codecov-action@v2
 
       - name: Build
         run: yarn run build
