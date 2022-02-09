@@ -47,7 +47,7 @@ jobs:
         run: yarn lint
 
       - name: Test
-        run: yarn test --coverage
+        run: yarn test:coverage
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1.27
