@@ -63,7 +63,7 @@ jobs:
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CODE_CLIMATE_ID }}
         with:
-          coverageCommand: yarn:coverage
+          coverageCommand: yarn test:coverage
 
       - name: Add to codecov
         uses: codecov/codecov-action@v2
