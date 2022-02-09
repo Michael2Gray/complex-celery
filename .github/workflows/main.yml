@@ -7,7 +7,8 @@ on:
     branches: [master, develop, release/*]
 
 jobs:
-  quality:
+  initialisation:
+    name: Initialisation
     runs-on: ubuntu-latest
 
     steps:
@@ -37,6 +38,12 @@ jobs:
       - name: Install
         run: yarn install --frozen-lockfile
 
+  quality:
+    name: Quality
+    needs: setup
+    runs-on: ubuntu-latest
+
+    steps:
       - name: Format
         run: yarn prettier --check .
 
@@ -68,7 +75,7 @@ jobs:
 
   deploy:
     name: Deploy
-    needs: quality
+    needs: reporting
     runs-on: ubuntu-latest
 
     steps:
