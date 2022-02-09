@@ -8,7 +8,7 @@ on:
 
 jobs:
   quality:
-    name: Quality
+    name: Quality & Deployment
     runs-on: ubuntu-latest
 
     steps:
@@ -61,12 +61,6 @@ jobs:
       - name: Add to codecov
         uses: codecov/codecov-action@v2
 
-  deploy:
-    name: Deploy
-    needs: quality
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
