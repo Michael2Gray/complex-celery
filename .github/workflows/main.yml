@@ -50,11 +50,9 @@ jobs:
         run: yarn test:coverage
 
       - name: Code Coverage
-        uses: zgosalvez/github-actions-report-lcov@v1.3.2
+        uses: romeovs/lcov-reporter-action@v0.2.16
         with:
-          coverage-files: coverage/lcov.*.info
-          minimum-coverage: 80
-          artifact-name: code-coverage-report
+          lcov-file: ./coverage/lcov.info
 
       - name: Build
         run: yarn run build
