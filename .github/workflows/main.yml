@@ -40,7 +40,7 @@ jobs:
 
   quality:
     name: Quality
-    needs: setup
+    needs: initialisation
     runs-on: ubuntu-latest
 
     steps:
