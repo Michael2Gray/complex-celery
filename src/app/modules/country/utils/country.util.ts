@@ -35,17 +35,17 @@ export const getKnownNullCountry = (city: string): string => {
 export const getCountriesFromCities = (
   cities: City[]
 ): Omit<Country, 'weather'>[] => {
-  const citiesByCountry = _groupBy(cities, 'country');
+  const CITIES_BY_COUNTRY = _groupBy(cities, 'country');
 
-  const countries: Omit<Country, 'weather'>[] = [];
+  const COUNTRIES: Omit<Country, 'weather'>[] = [];
 
-  for (const [key, value] of Object.entries(citiesByCountry)) {
-    countries.push({
+  for (const [key, value] of Object.entries(CITIES_BY_COUNTRY)) {
+    COUNTRIES.push({
       name: key,
       cities: value,
       coords: COUNTRY_LAT_LNGS[key],
     });
   }
 
-  return _orderBy(countries, 'name');
+  return _orderBy(COUNTRIES, 'name');
 };

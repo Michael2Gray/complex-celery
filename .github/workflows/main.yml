@@ -35,6 +35,9 @@ jobs:
           restore-keys: |
             ${{runner.os}}-yarn-
 
+      - name: Add secret to '.npmrc' file
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.COMPLEX_CELERY_CI }}" > ~/.npmrc
+
       - name: Install
         run: yarn install --frozen-lockfile
 
@@ -68,9 +71,9 @@ jobs:
       - name: Add to codecov
         uses: codecov/codecov-action@v2
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: 'complex-celery-github'
-          heroku_email: 'michael2.gray@gmail.com'
+      # - name: Deploy to Heroku
+      #   uses: akhileshns/heroku-deploy@v3.12.12
+      #   with:
+      #     heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+      #     heroku_app_name: 'complex-celery-github'
+      #     heroku_email: 'michael2.gray@gmail.com'
