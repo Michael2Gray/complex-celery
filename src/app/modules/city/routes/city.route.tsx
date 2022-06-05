@@ -17,17 +17,16 @@ export const CityRoute = () => {
   return (
     <CountriesProvider city={city}>
       <CountriesConsumer>
-        {(state) => {
-          const isoCode = state?.isoCode ?? DEFAULT_ISO_CODE;
-
-          return (
-            <CityProvider city={city} location={`${city.name},${isoCode}`}>
-              <Page>
-                <City />
-              </Page>
-            </CityProvider>
-          );
-        }}
+        {(state) => (
+          <CityProvider
+            city={city}
+            location={`${city.name},${state?.isoCode ?? DEFAULT_ISO_CODE}`}
+          >
+            <Page>
+              <City />
+            </Page>
+          </CityProvider>
+        )}
       </CountriesConsumer>
     </CountriesProvider>
   );
